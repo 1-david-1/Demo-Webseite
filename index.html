@@ -28,6 +28,10 @@
       --accent-deep: #7f1117;
       --gold: #c8a86b;
       --sage: #6c8379;
+      --cyan: #49ddcb;
+      --cyan-soft: rgba(73, 221, 203, 0.16);
+      --success: #78d88f;
+      --danger-soft: rgba(197, 22, 29, 0.18);
       --border: rgba(255, 255, 255, 0.1);
       --border-dark: rgba(22, 23, 25, 0.12);
       --nav-bg: rgba(16, 17, 19, 0.74);
@@ -63,6 +67,11 @@
 
     a {
       color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
     }
 
     button,
@@ -342,6 +351,140 @@
       padding-bottom: clamp(56px, 8vw, 92px);
     }
 
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.78fr);
+      gap: clamp(30px, 5vw, 74px);
+      align-items: center;
+    }
+
+    .hero-copy {
+      min-width: 0;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 540px;
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow-card);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .photo-frame:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.08);
+    }
+
+    .photo-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(0deg, rgba(16, 17, 19, 0.78), transparent 48%),
+        linear-gradient(90deg, rgba(16, 17, 19, 0.46), transparent);
+    }
+
+    .status-panel {
+      position: absolute;
+      left: -24px;
+      bottom: 34px;
+      width: min(360px, 82%);
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(16, 17, 19, 0.82);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-card);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .status-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .status-panel small {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .status-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .status-list strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(120, 216, 143, 0.12);
+    }
+
+    .trust-rail {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .trust-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white-faint);
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      font-weight: 800;
+      transition: background var(--duration-fast) var(--ease),
+                  transform var(--duration-fast) var(--ease);
+    }
+
+    .trust-chip:hover {
+      transform: translateY(-4px);
+      background: var(--white-soft);
+    }
+
     .kicker {
       display: inline-flex;
       align-items: center;
@@ -597,6 +740,39 @@
       line-height: 1.45;
     }
 
+    .leader-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .leader-card {
+      padding: 20px;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      background: var(--surface-raised);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .leader-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .leader-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-family: var(--font-display);
+    }
+
+    .leader-card p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+    }
+
     .grid {
       display: grid;
       gap: 18px;
@@ -646,6 +822,106 @@
       color: var(--text-muted);
       font-size: 0.88rem;
       line-height: 1.45;
+    }
+
+    .security-console {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+      gap: 20px;
+      align-items: stretch;
+      margin-bottom: 28px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 84% 28%, var(--cyan-soft), transparent 34%),
+        var(--surface);
+      box-shadow: var(--shadow-card);
+    }
+
+    .console-copy {
+      padding: 14px;
+    }
+
+    .console-copy h3 {
+      color: var(--text);
+    }
+
+    .console-map {
+      position: relative;
+      min-height: 280px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background:
+        linear-gradient(90deg, var(--white-faint) 1px, transparent 1px),
+        linear-gradient(var(--white-faint) 1px, transparent 1px),
+        rgba(255, 255, 255, 0.03);
+      background-size: 42px 42px;
+    }
+
+    .console-route {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 48%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--accent), var(--gold));
+      transform: rotate(-8deg);
+      transform-origin: center;
+      transition: transform var(--duration-slow) var(--ease);
+    }
+
+    .security-console:hover .console-route {
+      transform: rotate(-4deg) scaleX(1.05);
+    }
+
+    .console-node {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--cyan);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 0 0 8px var(--cyan-soft);
+      transition: transform var(--duration-fast) var(--ease),
+                  border-color var(--duration-fast) var(--ease);
+    }
+
+    .console-node:hover {
+      transform: scale(1.18);
+      border-color: var(--gold);
+    }
+
+    .console-node.one { left: 14%; top: 30%; }
+    .console-node.two { left: 35%; top: 56%; }
+    .console-node.three { left: 62%; top: 24%; }
+    .console-node.four { left: 80%; top: 58%; }
+
+    .console-alert {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(16, 17, 19, 0.8);
+      backdrop-filter: blur(14px);
+    }
+
+    .console-alert strong {
+      color: var(--text);
+    }
+
+    .console-alert span {
+      color: var(--success);
+      font-size: 0.82rem;
+      font-weight: 800;
     }
 
     .section-head {
@@ -837,6 +1113,33 @@
       margin-bottom: 0;
     }
 
+    .client-wall {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .client-pill {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      padding: 13px 14px;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      background: var(--surface-raised);
+      color: var(--text-muted-dark);
+      font-size: 0.84rem;
+      font-weight: 800;
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .client-pill:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
     .contact-shell {
       display: grid;
       grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -1012,9 +1315,16 @@
       .grid.four,
       .flow,
       .mission-grid,
+      .leader-grid,
+      .security-console,
+      .hero-layout,
       .split,
       .contact-shell {
         grid-template-columns: 1fr;
+      }
+
+      .client-wall {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .section-head {
@@ -1043,6 +1353,22 @@
 
       .proof-row {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .client-wall {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stage {
+        min-height: auto;
+      }
+
+      .status-panel {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        width: 100%;
+        margin-top: 12px;
       }
 
       .proof {
@@ -1120,12 +1446,36 @@
         </div>
 
         <div class="container hero-inner">
-          <p class="kicker reveal">Sicherheitstechnik und Alarmanlagen aus Hilden</p>
-          <h1 id="home-title" class="reveal delay-1">Der beste Schutz ist Teamwork.</h1>
-          <p class="lead reveal delay-2">Seit 2004 entwickelt KUGLER-ALARM maßgeschneiderte Sicherheitslösungen für Unternehmen und private Haushalte. Persönliche Beratung, zertifizierte Expertise und Full-Service machen aus Technik ein verlässliches Sicherheitskonzept.</p>
-          <div class="actions reveal delay-3">
-            <a class="btn primary" href="#contact" data-link="contact">Beratung anfragen</a>
-            <a class="btn ghost" href="#services" data-link="services">Leistungen ansehen</a>
+          <div class="hero-layout">
+            <div class="hero-copy">
+              <p class="kicker reveal">Sicherheitstechnik und Alarmanlagen aus Hilden</p>
+              <h1 id="home-title" class="reveal delay-1">Der beste Schutz ist Teamwork.</h1>
+              <p class="lead reveal delay-2">Seit 2004 entwickelt KUGLER-ALARM maßgeschneiderte Sicherheitslösungen für Unternehmen und private Haushalte. Persönliche Beratung, zertifizierte Expertise und Full-Service machen aus Technik ein verlässliches Sicherheitskonzept.</p>
+              <div class="trust-rail reveal delay-2" aria-label="Trust Signals">
+                <span class="trust-chip">VdS anerkannt</span>
+                <span class="trust-chip">LKA-Errichterverzeichnis</span>
+                <span class="trust-chip">DIN 14675</span>
+                <span class="trust-chip">QM-zertifiziert</span>
+              </div>
+              <div class="actions reveal delay-3">
+                <a class="btn primary" href="#contact" data-link="contact">Sicherheitscheck anfragen</a>
+                <a class="btn ghost" href="#services" data-link="services">Leistungen ansehen</a>
+              </div>
+            </div>
+
+            <div class="hero-stage reveal delay-2" aria-label="KUGLER-ALARM Projektierung">
+              <div class="photo-frame">
+                <img src="https://www.kugler-alarm.de/wp-content/uploads/2024/07/das-team-von-kugler-alarm-bei-der-projektierung-neu.webp" alt="KUGLER-ALARM Team bei der Projektierung">
+              </div>
+              <aside class="status-panel" aria-label="Sicherheitsstatus">
+                <small>Secure-by-Design</small>
+                <ul class="status-list">
+                  <li><span>Beratung</span><strong>aktiv</strong><span class="status-dot" aria-hidden="true"></span></li>
+                  <li><span>Projektierung</span><strong>geprüft</strong><span class="status-dot" aria-hidden="true"></span></li>
+                  <li><span>Wartung</span><strong>24/7</strong><span class="status-dot" aria-hidden="true"></span></li>
+                </ul>
+              </aside>
+            </div>
           </div>
 
           <div class="proof-row reveal delay-3" aria-label="KUGLER-ALARM Fakten">
@@ -1180,6 +1530,16 @@
                 <p>Montage, Einweisung, Wartung und Service sichern die Anlage langfristig ab.</p>
               </div>
             </div>
+            <div class="leader-grid" aria-label="Geschäftsführung">
+              <div class="leader-card">
+                <strong>Birgit Kugler</strong>
+                <p>Seit 2004 vertrauensvolle Ansprechpartnerin. Ihr Versprechen: Effizienz, Vertrauen und kurze Entscheidungswege.</p>
+              </div>
+              <div class="leader-card">
+                <strong>Mario Griszewski</strong>
+                <p>Steht für den Full-Service-Anspruch: Konzept, Installation, Wartung und schnelle Hilfe im Störungsfall.</p>
+              </div>
+            </div>
           </article>
         </div>
         <div class="container mission-grid reveal delay-3" aria-label="Mission von KUGLER-ALARM">
@@ -1210,6 +1570,25 @@
             <div class="flow-step"><strong>04</strong><span>Sorgfältige Montage bis zur betriebsfertigen Übergabe.</span></div>
             <div class="flow-step"><strong>05</strong><span>Service bei Fragen, Erweiterungen oder Störungsfällen.</span></div>
             <div class="flow-step"><strong>06</strong><span>Wartung und Instandhaltung für zuverlässige Funktion.</span></div>
+          </div>
+
+          <div class="security-console reveal delay-3" aria-label="Simuliertes Sicherheitscockpit">
+            <div class="console-copy">
+              <p class="kicker">Modernisierungsidee</p>
+              <h3>Sicherheitscockpit statt austauschbarer Slider.</h3>
+              <p>Die Originalseite zeigt viele starke Themen. In dieser Demo werden sie in eine klare Kontrolllogik übersetzt: Systeme, Standorte, Service und Wartung wirken wie ein vernetztes Sicherheitskonzept.</p>
+            </div>
+            <div class="console-map" aria-hidden="true">
+              <span class="console-route"></span>
+              <span class="console-node one"></span>
+              <span class="console-node two"></span>
+              <span class="console-node three"></span>
+              <span class="console-node four"></span>
+              <div class="console-alert">
+                <strong>Objektstatus: geschützt</strong>
+                <span>Service bereit</span>
+              </div>
+            </div>
           </div>
 
           <div class="grid three" aria-label="Leistungskarten">
@@ -1309,6 +1688,29 @@
             <article class="trust-card reveal delay-1"><strong>Museen</strong><p>Sicherheitskonzepte für Werte, Ausstellungen und Besucherströme.</p></article>
             <article class="trust-card reveal delay-2"><strong>Arztpraxen</strong><p>Einbruchschutz und Zugangskontrolle für sensible Praxisbereiche.</p></article>
             <article class="trust-card reveal delay-3"><strong>Einzelhandel</strong><p>Videoüberwachung und Schutz für Verkaufsflächen und Lager.</p></article>
+            <article class="trust-card reveal"><strong>DAITEM Profi Partner</strong><p>Kompetenz für moderne Funkalarm- und Meldetechnik.</p></article>
+            <article class="trust-card reveal delay-1"><strong>ESSER FlexES Partner</strong><p>Fachwissen für Brandmelde- und Gebäudesicherheit.</p></article>
+            <article class="trust-card reveal delay-2"><strong>QM-zertifiziert</strong><p>Geprüfte Qualität in Arbeit, Organisation und Service.</p></article>
+            <article class="trust-card reveal delay-3"><strong>VdS Fachfirma</strong><p>Anerkannt für Brandmelde- und Sicherheitsanlagen.</p></article>
+          </div>
+
+          <div class="client-wall reveal delay-2" aria-label="Auszug Referenzen">
+            <div class="client-pill">LVR Archäologischer Park Xanten</div>
+            <div class="client-pill">Clemens Sels Museum Neuss</div>
+            <div class="client-pill">Medizinischer Dienst Nordrhein</div>
+            <div class="client-pill">Rheinland Klinikum</div>
+            <div class="client-pill">Stadt Neuss</div>
+            <div class="client-pill">Stadt Bochum</div>
+            <div class="client-pill">Stadt Ratingen</div>
+            <div class="client-pill">Stadtwerke Bochum</div>
+            <div class="client-pill">Bankhaus HAL</div>
+            <div class="client-pill">EDEKA Hein</div>
+            <div class="client-pill">Haaner Felsenquelle</div>
+            <div class="client-pill">Schley's Gartencenter</div>
+            <div class="client-pill">Spedition Dörrenhaus</div>
+            <div class="client-pill">Hans Brandenburg</div>
+            <div class="client-pill">Wera</div>
+            <div class="client-pill">Tuppenhof</div>
           </div>
         </div>
       </div>
