@@ -1,241 +1,1476 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KUGLER-ALARM Demo 01 | Sicherheitstechnik neu inszeniert</title>
-    <meta name="description" content="Demo-Webseite fuer KUGLER-ALARM: moderne Sicherheitstechnik, Alarmanlagen, Videoüberwachung, Brandmelder und Zutrittskontrolle aus Hilden.">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class="noise">
-    <div class="variant-switch" aria-label="Demo Varianten">
-      <a href="index.html" aria-current="page">Demo 01: Vertrauen</a>
-      <a href="demo-02.html">Demo 02: Leitstand</a>
-      <a href="demo-03.html">Demo 03: Privat & Gewerbe</a>
-      <a href="dokumentation-und-email.html">Dokumentation & Mail</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KUGLER-ALARM | Premium Demo Website</title>
+  <meta name="description" content="Premium Demo-Website fuer KUGLER-ALARM: Alarmanlagen, Sicherheitstechnik, Brandmelder, Videoüberwachung und Zutrittskontrolle aus Hilden.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-fast: 0.25s;
+      --duration-normal: 0.55s;
+      --duration-slow: 0.9s;
+      --bg: #101113;
+      --bg-soft: #17191d;
+      --surface: #1f2228;
+      --surface-raised: #f8f5ef;
+      --surface-warm: #ebe4d8;
+      --text: #f7f3eb;
+      --text-dark: #161719;
+      --text-muted: rgba(247, 243, 235, 0.62);
+      --text-muted-dark: rgba(22, 23, 25, 0.62);
+      --accent: #c5161d;
+      --accent-hover: #e12a31;
+      --accent-deep: #7f1117;
+      --gold: #c8a86b;
+      --sage: #6c8379;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-dark: rgba(22, 23, 25, 0.12);
+      --nav-bg: rgba(16, 17, 19, 0.74);
+      --hero-vignette: rgba(16, 17, 19, 0.9);
+      --hero-glow: rgba(197, 22, 29, 0.22);
+      --white-faint: rgba(255, 255, 255, 0.08);
+      --white-soft: rgba(255, 255, 255, 0.16);
+      --focus: rgba(200, 168, 107, 0.52);
+      --shadow-card: 0 18px 52px rgba(0, 0, 0, 0.16);
+      --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.12);
+      --shadow-nav: 0 16px 50px rgba(0, 0, 0, 0.18);
+      --font-display: "Syne", sans-serif;
+      --font-body: "Plus Jakarta Sans", sans-serif;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      letter-spacing: 0;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 78px;
+      padding: 14px clamp(18px, 4vw, 42px);
+      border-bottom: 1px solid var(--border);
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-nav);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand-sign {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--white-soft);
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      color: var(--text);
+      font-family: var(--font-display);
+      font-weight: 800;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 142px;
+      max-width: 42vw;
+      height: auto;
+      padding: 7px 9px;
+      border: 1px solid var(--white-soft);
+      border-radius: 12px;
+      background: var(--surface-raised);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .brand:hover .brand-logo {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .brand strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      line-height: 1;
+    }
+
+    .brand span:last-child {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(15px, 2vw, 28px);
+    }
+
+    nav a {
+      position: relative;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: color var(--duration-fast) var(--ease);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--duration-normal) var(--ease);
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: var(--text);
+    }
+
+    nav a.active::after,
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white-faint);
+      color: var(--text);
+      transition: background var(--duration-fast) var(--ease),
+                  transform var(--duration-fast) var(--ease);
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.03);
+      background: var(--white-soft);
+    }
+
+    .menu-toggle:active {
+      transform: scale(0.98);
+    }
+
+    .menu-lines {
+      display: grid;
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .menu-lines span {
+      display: block;
+      width: 19px;
+      height: 2px;
+      background: var(--text);
+      transition: transform var(--duration-fast) var(--ease),
+                  opacity var(--duration-fast) var(--ease);
+    }
+
+    body.menu-open .menu-lines span:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    body.menu-open .menu-lines span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.menu-open .menu-lines span:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    main {
+      position: relative;
+      min-height: calc(100vh - 78px);
+      overflow: hidden;
+    }
+
+    .page {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+
+    .page.active {
+      opacity: 1;
+      pointer-events: all;
+      position: relative;
+      transform: translateY(0);
+    }
+
+    .page.exiting {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+
+    .section {
+      padding: clamp(82px, 11vw, 128px) clamp(18px, 4vw, 42px);
+    }
+
+    .section.compact {
+      padding-top: clamp(74px, 9vw, 104px);
+      padding-bottom: clamp(74px, 9vw, 104px);
+    }
+
+    .container {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 78px);
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 76% 22%, var(--hero-glow), transparent 33%),
+        radial-gradient(circle at 18% 84%, var(--white-faint), transparent 28%),
+        linear-gradient(135deg, var(--bg), var(--surface) 52%, var(--bg-soft));
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, var(--hero-vignette), transparent 58%),
+        linear-gradient(0deg, var(--hero-vignette), transparent 46%);
+    }
+
+    .hero-art {
+      position: absolute;
+      right: clamp(-160px, -8vw, -70px);
+      top: 8vh;
+      z-index: -1;
+      width: min(720px, 85vw);
+      opacity: 0.72;
+    }
+
+    .hero-art svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-gridline,
+    .hero-ring,
+    .hero-panel {
+      transition: transform var(--duration-slow) var(--ease),
+                  opacity var(--duration-slow) var(--ease);
+    }
+
+    .hero:hover .hero-ring {
+      transform: translateY(-8px);
+    }
+
+    .hero:hover .hero-panel {
+      transform: translateY(8px);
+    }
+
+    .hero-inner {
+      padding-top: 80px;
+      padding-bottom: clamp(56px, 8vw, 92px);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 26px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin-bottom: 22px;
+      font-size: clamp(3.1rem, 8.5vw, 7.6rem);
+      line-height: 0.88;
+      font-weight: 800;
+    }
+
+    h2 {
+      max-width: 820px;
+      margin-bottom: 18px;
+      font-size: clamp(2.15rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      font-weight: 800;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      line-height: 1.05;
+    }
+
+    p {
+      color: var(--text-muted);
+      line-height: 1.72;
+    }
+
+    .lead {
+      max-width: 720px;
+      font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+    }
+
+    .light {
+      background: var(--surface-raised);
+      color: var(--text-dark);
+    }
+
+    .light p {
+      color: var(--text-muted-dark);
+    }
+
+    .light .kicker {
+      color: var(--accent-deep);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background var(--duration-fast) var(--ease),
+                  transform var(--duration-fast) var(--ease),
+                  border-color var(--duration-fast) var(--ease),
+                  color var(--duration-fast) var(--ease);
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .btn.primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn.ghost {
+      border: 1px solid var(--border);
+      background: var(--white-faint);
+      color: var(--text);
+    }
+
+    .light .btn.ghost {
+      border-color: var(--border-dark);
+      background: transparent;
+      color: var(--text-dark);
+    }
+
+    .proof-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 58px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--border);
+    }
+
+    .proof {
+      min-height: 126px;
+      padding: 22px;
+      background: var(--white-faint);
+      backdrop-filter: blur(12px);
+    }
+
+    .proof strong {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .proof span {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(28px, 6vw, 84px);
+      align-items: center;
+    }
+
+    .story-panel {
+      position: relative;
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      background:
+        linear-gradient(135deg, var(--surface-raised), var(--surface-warm));
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .story-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -28% 28%;
+      height: 220px;
+      border-radius: 50%;
+      background: var(--hero-glow);
+      transition: transform var(--duration-slow) var(--ease);
+    }
+
+    .story-panel:hover::after {
+      transform: translateY(-10px);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      background: var(--surface-raised);
+    }
+
+    .timeline-item strong {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+    }
+
+    .timeline-item p {
+      margin-bottom: 0;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .mission-pill {
+      min-height: 92px;
+      padding: 16px;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      background: var(--surface-raised);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .mission-pill:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .mission-pill strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-family: var(--font-display);
+    }
+
+    .mission-pill span {
+      color: var(--text-muted-dark);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid.four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1px;
+      margin-bottom: 34px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--border);
+    }
+
+    .flow-step {
+      min-height: 138px;
+      padding: 18px;
+      background: var(--surface);
+      transition: background var(--duration-fast) var(--ease),
+                  transform var(--duration-fast) var(--ease);
+    }
+
+    .flow-step:hover {
+      background: var(--bg-soft);
+      transform: translateY(-4px);
+    }
+
+    .flow-step strong {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+    }
+
+    .flow-step span {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .section-head p {
+      max-width: 470px;
+      margin-bottom: 0;
+    }
+
+    .card {
+      position: relative;
+      min-height: 242px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--white-faint), transparent);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .light .card {
+      border-color: var(--border-dark);
+      background: var(--surface-raised);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--gold), var(--sage));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-fast) var(--ease);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white-faint);
+      color: var(--gold);
+    }
+
+    .light .icon {
+      border-color: var(--border-dark);
+      background: var(--surface-warm);
+      color: var(--accent);
+    }
+
+    .icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card p {
+      margin-bottom: 0;
+    }
+
+    .card small {
+      display: inline-flex;
+      margin-bottom: 14px;
+      color: var(--gold);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .card:nth-child(1) {
+      transition-delay: 0ms;
+    }
+
+    .card:nth-child(2) {
+      transition-delay: 100ms;
+    }
+
+    .card:nth-child(3) {
+      transition-delay: 200ms;
+    }
+
+    .card:nth-child(4) {
+      transition-delay: 300ms;
+    }
+
+    .card:nth-child(5) {
+      transition-delay: 100ms;
+    }
+
+    .card:nth-child(6) {
+      transition-delay: 200ms;
+    }
+
+    .advantage {
+      padding: 28px;
+      border-radius: 12px;
+      background: var(--surface-raised);
+      color: var(--text-dark);
+    }
+
+    .advantage strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1;
+    }
+
+    .quote {
+      grid-column: span 2;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(28px, 4vw, 42px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 82% 22%, var(--hero-glow), transparent 36%),
+        var(--surface);
+      box-shadow: var(--shadow-card);
+    }
+
+    .quote blockquote {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 3vw, 3.1rem);
+      line-height: 1.08;
+    }
+
+    .quote cite {
+      margin-top: 26px;
+      color: var(--text-muted);
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .trust-card {
+      padding: 28px;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      background: var(--surface-raised);
+      color: var(--text-dark);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .trust-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .trust-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+    }
+
+    .trust-card p {
+      margin-bottom: 0;
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .contact-note,
+    .form-card {
+      padding: clamp(26px, 4vw, 44px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--white-faint), transparent);
+      box-shadow: var(--shadow-card);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    label.full {
+      grid-column: 1 / -1;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white-faint);
+      color: var(--text);
+      min-height: 48px;
+      padding: 13px 14px;
+      transition: border-color var(--duration-fast) var(--ease),
+                  background var(--duration-fast) var(--ease);
+    }
+
+    select {
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold);
+      background: var(--white-soft);
+      outline: 0;
+    }
+
+    .form-success {
+      min-height: 24px;
+      margin-top: 16px;
+      color: var(--gold);
+      font-weight: 800;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity var(--duration-fast) var(--ease),
+                  transform var(--duration-fast) var(--ease);
+    }
+
+    .form-success.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity var(--duration-normal) var(--ease),
+                  transform var(--duration-normal) var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.delay-1 {
+      transition-delay: 100ms;
+    }
+
+    .reveal.delay-2 {
+      transition-delay: 200ms;
+    }
+
+    .reveal.delay-3 {
+      transition-delay: 300ms;
+    }
+
+    footer {
+      padding: 34px clamp(18px, 4vw, 42px);
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      font-weight: 800;
+      text-decoration: none;
+      transition: color var(--duration-fast) var(--ease);
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .menu-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 78px;
+        left: 14px;
+        right: 14px;
+        z-index: 49;
+        display: grid;
+        gap: 0;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--surface);
+        box-shadow: var(--shadow-nav);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-12px);
+        transition: opacity var(--duration-fast) var(--ease),
+                    transform var(--duration-fast) var(--ease);
+      }
+
+      body.menu-open .nav-links {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        padding: 15px 12px;
+      }
+
+      .nav-links a::after {
+        bottom: 9px;
+        left: 12px;
+      }
+
+      .proof-row,
+      .grid.three,
+      .grid.four,
+      .flow,
+      .mission-grid,
+      .split,
+      .contact-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .quote {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .brand span:last-child {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-art {
+        top: 22vh;
+        right: -220px;
+        opacity: 0.42;
+      }
+
+      .proof-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .proof {
+        min-height: 112px;
+        padding: 17px;
+      }
+
+      .timeline-item,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        display: grid;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Hauptnavigation">
+    <a class="brand" href="#home" data-link="home" aria-label="KUGLER-ALARM Startseite">
+      <img class="brand-logo" src="https://www.kugler-alarm.de/wp-content/uploads/2022/12/logo-kugler-alarm-hilden-duesseldorf.png" alt="KUGLER-ALARM Logo">
+      <span>
+        <strong>KUGLER-ALARM</strong>
+        <span>Sicherheitstechnik Hilden</span>
+      </span>
+    </a>
+
+    <div class="nav-links" id="nav-links">
+      <a href="#home" data-link="home" class="active">Home</a>
+      <a href="#about" data-link="about">Über uns</a>
+      <a href="#services" data-link="services">Leistungen</a>
+      <a href="#references" data-link="references">Vorteile</a>
+      <a href="#contact" data-link="contact">Kontakt</a>
     </div>
 
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="KUGLER-ALARM Start">
-        <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/12/logo-kugler-alarm-hilden-duesseldorf.png" alt="KUGLER-ALARM">
-      </a>
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a href="#leistungen">Leistungen</a>
-        <a href="#prozess">Ablauf</a>
-        <a href="#vertrauen">Vertrauen</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <a class="button" href="tel:+492103248990">02103 24 899-0</a>
-    </header>
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-links">
+      <span class="menu-lines" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+  </nav>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-media">
-          <img src="https://www.kugler-alarm.de/wp-content/uploads/2024/07/das-team-von-kugler-alarm-bei-der-projektierung-neu.webp" alt="Das Team von KUGLER-ALARM bei der Projektierung">
+  <main>
+    <section id="page-home" class="page active" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 720 720" role="img">
+            <defs>
+              <linearGradient id="shieldGradient" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="var(--accent)"></stop>
+                <stop offset="1" stop-color="var(--gold)"></stop>
+              </linearGradient>
+            </defs>
+            <g class="hero-ring" opacity="0.34">
+              <circle cx="360" cy="360" r="318" stroke="var(--white-soft)" stroke-width="1" fill="none"></circle>
+              <circle cx="360" cy="360" r="246" stroke="var(--white-soft)" stroke-width="1" fill="none"></circle>
+              <circle cx="360" cy="360" r="172" stroke="var(--white-soft)" stroke-width="1" fill="none"></circle>
+            </g>
+            <g class="hero-gridline" opacity="0.28">
+              <path d="M78 360H642M360 78V642M162 162l396 396M558 162 162 558" stroke="var(--white-soft)" stroke-width="1"></path>
+            </g>
+            <g class="hero-panel">
+              <path d="M360 104 554 178v150c0 129-73 224-194 287-121-63-194-158-194-287V178l194-74Z" fill="var(--surface)" stroke="url(#shieldGradient)" stroke-width="8"></path>
+              <path d="M282 362 334 414 452 292" stroke="url(#shieldGradient)" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M246 220h228M246 508h228" stroke="var(--white-soft)" stroke-width="2"></path>
+            </g>
+          </svg>
         </div>
-        <canvas class="signal-canvas" aria-hidden="true"></canvas>
-        <div class="hero-inner">
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Alarmanlagen und Sicherheitstechnik aus Hilden</p>
-            <h1>Sicherheit, die schon beim ersten Blick Vertrauen schafft.</h1>
-            <p class="lead">KUGLER-ALARM plant, installiert und betreut moderne Sicherheitssysteme fuer Unternehmen und Zuhause. Von Einbruchmeldeanlagen bis Videoüberwachung, Brandmeldern und Zutrittskontrolle entsteht hier eine Demo mit klarerem Fokus, hochwertigerer Wahrnehmung und schnellerem Weg zur Anfrage.</p>
-            <div class="hero-actions">
-              <a class="button" href="#kontakt">Sicherheitsberatung anfragen</a>
-              <a class="ghost-button" href="#leistungen">Systeme ansehen</a>
-            </div>
+
+        <div class="container hero-inner">
+          <p class="kicker reveal">Sicherheitstechnik und Alarmanlagen aus Hilden</p>
+          <h1 id="home-title" class="reveal delay-1">Der beste Schutz ist Teamwork.</h1>
+          <p class="lead reveal delay-2">Seit 2004 entwickelt KUGLER-ALARM maßgeschneiderte Sicherheitslösungen für Unternehmen und private Haushalte. Persönliche Beratung, zertifizierte Expertise und Full-Service machen aus Technik ein verlässliches Sicherheitskonzept.</p>
+          <div class="actions reveal delay-3">
+            <a class="btn primary" href="#contact" data-link="contact">Beratung anfragen</a>
+            <a class="btn ghost" href="#services" data-link="services">Leistungen ansehen</a>
           </div>
 
-          <div class="hero-stats reveal" aria-label="Kennzahlen">
-            <div class="stat">
-              <strong data-count="2004">0</strong>
-              <span>gegruendet</span>
+          <div class="proof-row reveal delay-3" aria-label="KUGLER-ALARM Fakten">
+            <div class="proof">
+              <strong>2004</strong>
+              <span>vertrauensvoller Ansprechpartner seit Gründung</span>
             </div>
-            <div class="stat">
-              <strong data-count="4800" data-suffix="+">0</strong>
-              <span>realisierte Projekte</span>
+            <div class="proof">
+              <strong>4.800+</strong>
+              <span>realisierte Sicherheitsprojekte</span>
             </div>
-            <div class="stat">
+            <div class="proof">
               <strong>24/7</strong>
-              <span>erreichbarer Service</span>
+              <span>Service und schnelle Hilfe im Betrieb</span>
             </div>
-            <div class="stat">
+            <div class="proof">
               <strong>VdS</strong>
-              <span>regelmaessig geprüft</span>
+              <span>regelmäßig geprüfte Qualität</span>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section" id="vertrauen">
+    <section id="page-about" class="page light" aria-labelledby="about-title">
+      <div class="section">
         <div class="container split">
-          <div class="image-stage reveal">
-            <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/10/projektplanung-im-team-von-kugler-alarm-1030x515.jpeg" alt="Projektplanung im Team von KUGLER-ALARM">
-            <span class="scanline" aria-hidden="true"></span>
-          </div>
-          <div class="reveal">
-            <p class="eyebrow">Positionierung</p>
-            <h2>Aus Technik wird ein klares Sicherheitsversprechen.</h2>
-            <p class="lead">Die bestehende Seite hat starke Belege, verteilt sie aber sehr klassisch. Diese Demo bringt die wichtigsten Entscheidungsfaktoren nach oben: geprüfte Qualität, regionaler Ansprechpartner, Full-Service und konkrete Systeme.</p>
-            <div class="badge-strip">
-              <span class="badge">VdS-anerkannt</span>
-              <span class="badge">DIN 14675</span>
-              <span class="badge">DIN EN 16763</span>
-              <span class="badge">Hilden und NRW</span>
-              <span class="badge">Planung bis Wartung</span>
+          <div>
+            <p class="kicker reveal">Über uns</p>
+            <h2 id="about-title" class="reveal delay-1">Gemeinsam stark für Ihre Sicherheit.</h2>
+            <p class="lead reveal delay-2">Sicherheit ist Vertrauenssache. KUGLER-ALARM verbindet modernste Sicherheitstechnik mit kurzen Entscheidungswegen, persönlicher Beratung und einem Full-Service-Angebot von der Analyse bis zur Wartung.</p>
+            <div class="actions reveal delay-3">
+              <a class="btn primary" href="#services" data-link="services">Systeme entdecken</a>
+              <a class="btn ghost" href="#contact" data-link="contact">Projekt besprechen</a>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="section tight" id="leistungen">
-        <div class="container">
-          <p class="eyebrow reveal">Leistungen</p>
-          <h2 class="reveal">Alles, was Schutz braucht, bekommt ein passendes System.</h2>
-          <div class="grid three">
-            <article class="service-card reveal">
-              <div class="service-image">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/08/signalgeber-einbruchmeldeanlage-705x470.jpg" alt="Signalgeber Einbruchmeldeanlage">
+          <article class="story-panel reveal delay-2">
+            <h3>Ihr Vertrauen in besten Händen</h3>
+            <p>Als Komplett-Anbieter punktet KUGLER-ALARM mit zügiger Abwicklung, individuell passenden Sicherheitskonzepten, professioneller Installation und fachkundiger Wartung. Genau dieser Full-Service wird hier klarer, ruhiger und hochwertiger inszeniert.</p>
+            <div class="timeline" aria-label="Unternehmensfakten">
+              <div class="timeline-item">
+                <strong>Analyse</strong>
+                <p>Bedarf, Richtlinien, Wünsche und Budget werden gemeinsam bewertet.</p>
               </div>
-              <span class="card-number">01</span>
+              <div class="timeline-item">
+                <strong>Konzept</strong>
+                <p>Ein Sicherheitskonzept entsteht passend zu Zuhause, Unternehmen oder Branche.</p>
+              </div>
+              <div class="timeline-item">
+                <strong>Betrieb</strong>
+                <p>Montage, Einweisung, Wartung und Service sichern die Anlage langfristig ab.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="container mission-grid reveal delay-3" aria-label="Mission von KUGLER-ALARM">
+          <div class="mission-pill"><strong>kompetent</strong><span>Experten finden die passende Sicherheitslösung.</span></div>
+          <div class="mission-pill"><strong>zuverlässig</strong><span>Schutz, auf den man sich jederzeit verlassen kann.</span></div>
+          <div class="mission-pill"><strong>organisiert</strong><span>Kurze Wege machen den Full-Service einfach.</span></div>
+          <div class="mission-pill"><strong>achtsam</strong><span>Sorgfalt in Beratung, Montage und Betreuung.</span></div>
+          <div class="mission-pill"><strong>kundennah</strong><span>Vertrauensvoller Austausch von Mensch zu Mensch.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-services" class="page" aria-labelledby="services-title">
+      <div class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="kicker reveal">Leistungen</p>
+              <h2 id="services-title" class="reveal delay-1">Von der sicheren Beratung bis zur regelmäßigen Wartung.</h2>
+            </div>
+            <p class="reveal delay-2">Die aktuelle Website hat den richtigen Ablauf bereits. Diese Demo macht ihn als klares Beratungssystem sichtbar und verknüpft ihn direkt mit den passenden Sicherheitslösungen.</p>
+          </div>
+
+          <div class="flow reveal delay-2" aria-label="Full-Service Ablauf">
+            <div class="flow-step"><strong>01</strong><span>Analyse von Zielen, Wünschen, Budget, Normen und Richtlinien.</span></div>
+            <div class="flow-step"><strong>02</strong><span>Persönliche Beratung mit Fachwissen, Erfahrung und Ideen.</span></div>
+            <div class="flow-step"><strong>03</strong><span>Projektierung mit abgestimmten Komponenten und Vorschriften im Blick.</span></div>
+            <div class="flow-step"><strong>04</strong><span>Sorgfältige Montage bis zur betriebsfertigen Übergabe.</span></div>
+            <div class="flow-step"><strong>05</strong><span>Service bei Fragen, Erweiterungen oder Störungsfällen.</span></div>
+            <div class="flow-step"><strong>06</strong><span>Wartung und Instandhaltung für zuverlässige Funktion.</span></div>
+          </div>
+
+          <div class="grid three" aria-label="Leistungskarten">
+            <article class="card reveal">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-3Z"></path><path d="m8.8 12.2 2.2 2.2 4.5-5"></path></svg>
+              </div>
+              <small>Unternehmen und Zuhause</small>
               <h3>Einbruchmeldeanlagen</h3>
-              <p>Schutz fuer private Immobilien, Gewerbeobjekte und sensible Bereiche mit individuell abgestimmter Melde- und Alarmtechnik.</p>
+              <p>Frühzeitige Erkennung und zuverlässiger Schutz vor Einbrüchen, abgestimmt auf Gebäude, Risiko und Alltag.</p>
             </article>
-            <article class="service-card reveal">
-              <div class="service-image">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/08/kamera-videoueberwachung-705x470.jpg" alt="Kamera fuer Videoüberwachung">
+
+            <article class="card reveal">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 8h12l4 4-4 4H4V8Z"></path><path d="M8 12h.1M12 12h.1"></path></svg>
               </div>
-              <span class="card-number">02</span>
+              <small>Alles im Blick</small>
               <h3>Videoüberwachung</h3>
-              <p>Moderne Kamerasysteme fuer Überblick, Nachvollziehbarkeit und schnelle Reaktion bei sicherheitsrelevanten Ereignissen.</p>
+              <p>Individuelle Lösungen für Unternehmen und Zuhause, damit relevante Bereiche jederzeit nachvollziehbar bleiben.</p>
             </article>
-            <article class="service-card reveal">
-              <div class="service-image">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/10/brandmelder-scaled-705x470.jpg" alt="Brandmelder">
+
+            <article class="card reveal">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3c3 3 5 5.5 5 9a5 5 0 0 1-10 0c0-2.4 1.2-4.6 3-6.8"></path><path d="M12 13c1.2 1.2 1.5 2 1.5 3a1.5 1.5 0 0 1-3 0c0-.9.4-1.8 1.5-3Z"></path></svg>
               </div>
-              <span class="card-number">03</span>
+              <small>Richtlinien im Griff</small>
               <h3>Brandmelde-Systeme</h3>
-              <p>Richtlinienkonforme Brandmeldetechnik mit Planung, Installation und laufender Betreuung durch geprüfte Fachleute.</p>
+              <p>Brandrisiken minimieren, Werte schützen und die wichtigen Bestimmungen professionell berücksichtigen.</p>
             </article>
-            <article class="service-card reveal">
-              <div class="service-image">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/09/zutrittskontrollsysteme-fuer-duesseldorf-705x187.jpg" alt="Zutrittskontrollsystem">
+
+            <article class="card reveal">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 11V8a4 4 0 0 1 8 0v3"></path><path d="M6 11h12v10H6z"></path><path d="M12 15v2"></path></svg>
               </div>
-              <span class="card-number">04</span>
+              <small>Zugang steuern</small>
               <h3>Zutrittskontrolle</h3>
-              <p>Kontrollierte Zugänge fuer Mitarbeitende, Dienstleister und Besucher mit sauberer Rechteverwaltung.</p>
+              <p>Damit klar bleibt, wer ein- und ausgeht. Kombinierbar mit weiteren Sicherheitskomponenten.</p>
             </article>
-            <article class="service-card reveal">
-              <div class="service-image">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/08/komponenten-einer-funk-alarmanlage-kugler-alarm-705x470.jpg" alt="Komponenten einer Funk-Alarmanlage">
+
+            <article class="card reveal">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"></path><path d="M8 12a4 4 0 0 1 8 0"></path><path d="M12 12h.1"></path><path d="M4 18h16"></path></svg>
               </div>
-              <span class="card-number">05</span>
+              <small>Nachrüstbar</small>
               <h3>Funkalarm</h3>
-              <p>Flexible Anlagen fuer bestehende Gebäude, bei denen Sicherheit ohne grosse bauliche Eingriffe nachgerüstet werden soll.</p>
+              <p>Sicherer Schutz mit einfacher Installation ohne Stemmarbeiten, erweiterbar und bequem steuerbar.</p>
             </article>
-            <article class="service-card reveal">
-              <div class="service-image">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2022/08/kugler-alarm-mit-sicherheit-rund-um-die-uhr-erreichbar-705x353.jpg" alt="Telefonzentrale KUGLER-ALARM">
+
+            <article class="card reveal">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 3v6h-6"></path></svg>
               </div>
-              <span class="card-number">06</span>
+              <small>Langfristig sicher</small>
               <h3>Service und Wartung</h3>
-              <p>Regelmaessige Prüfungen, schnelle Erreichbarkeit und langfristige Betreuung sichern die Funktion der Anlage im Alltag.</p>
+              <p>Regelmäßige Prüfungen, schnelle Erreichbarkeit und langfristige Betreuung halten Systeme im Alltag zuverlässig.</p>
             </article>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section dark" id="prozess">
+    <section id="page-references" class="page light" aria-labelledby="references-title">
+      <div class="section">
         <div class="container">
-          <p class="eyebrow reveal">Ablauf</p>
-          <h2 class="reveal">Ein strukturierter Weg von der Analyse bis zum sicheren Betrieb.</h2>
-          <div class="timeline reveal">
-            <article class="process-card">
-              <span class="card-number">01</span>
-              <h3>Sicherheitsanalyse</h3>
-              <p>Objekt, Risiko und Alltag werden gemeinsam bewertet, bevor Technik empfohlen wird.</p>
+          <div class="section-head">
+            <div>
+              <p class="kicker reveal">Referenzen und Vertrauen</p>
+              <h2 id="references-title" class="reveal delay-1">Sichere Lösungen, angepasst an Branche und Zuhause.</h2>
+            </div>
+            <p class="reveal delay-2">Die Originalseite nennt viele starke Einsatzfelder. In der Demo werden sie klarer als Social Proof und Orientierung genutzt: Unternehmen, Zuhause, Schulen, Hotels, Banken, Museen, Praxen und Einzelhandel.</p>
+          </div>
+
+          <div class="grid four">
+            <article class="advantage reveal">
+              <strong>4.800+</strong>
+              <p>Projekte zeigen, dass KUGLER-ALARM nicht nur Konzepte entwickelt, sondern Sicherheit im Alltag umsetzt.</p>
             </article>
-            <article class="process-card">
-              <span class="card-number">02</span>
-              <h3>Projektierung</h3>
-              <p>Die Anlage wird passend zum Gebäude, Budget und gewünschten Sicherheitsniveau geplant.</p>
+            <article class="advantage reveal">
+              <strong>VdS</strong>
+              <p>Das Prüfsiegel wird in dieser Demo sichtbar in die Entscheidung eingebunden, statt im Seitenfluss unterzugehen.</p>
             </article>
-            <article class="process-card">
-              <span class="card-number">03</span>
-              <h3>Installation</h3>
-              <p>Fachgerechte Umsetzung durch das KUGLER-Team mit klarer Einweisung der Nutzer.</p>
+            <article class="advantage reveal">
+              <strong>DIN</strong>
+              <p>DIN 14675 und DIN EN 16763 werden als Vertrauensanker für Planung, Betrieb und Qualität positioniert.</p>
             </article>
-            <article class="process-card">
-              <span class="card-number">04</span>
-              <h3>Wartung</h3>
-              <p>Regelmaessige Kontrolle und 24/7-Erreichbarkeit halten das System einsatzbereit.</p>
+            <article class="advantage reveal">
+              <strong>24/7</strong>
+              <p>Service wird als dauerhaftes Sicherheitsversprechen kommuniziert, nicht nur als kurzer Kontakt-Hinweis.</p>
             </article>
+            <article class="quote reveal delay-1">
+              <blockquote>„Zertifizierte Qualität schafft Vertrauen.“</blockquote>
+              <cite>VdS-anerkannt, LKA-Errichterverzeichnis und regelmäßig geprüfte Qualität</cite>
+            </article>
+            <article class="trust-card reveal delay-2"><strong>Schulen</strong><p>Amokalarm und Sicherheitskonzepte für besondere Schutzanforderungen.</p></article>
+            <article class="trust-card reveal delay-3"><strong>Hotels</strong><p>Sicherheitssysteme für Gäste, Mitarbeitende und sensible Betriebsbereiche.</p></article>
+            <article class="trust-card reveal"><strong>Banken</strong><p>Hohe Anforderungen an Zutritt, Alarmierung und Nachvollziehbarkeit.</p></article>
+            <article class="trust-card reveal delay-1"><strong>Museen</strong><p>Sicherheitskonzepte für Werte, Ausstellungen und Besucherströme.</p></article>
+            <article class="trust-card reveal delay-2"><strong>Arztpraxen</strong><p>Einbruchschutz und Zugangskontrolle für sensible Praxisbereiche.</p></article>
+            <article class="trust-card reveal delay-3"><strong>Einzelhandel</strong><p>Videoüberwachung und Schutz für Verkaufsflächen und Lager.</p></article>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section">
-        <div class="container comparison reveal">
-          <div class="compare-panel before">
-            <p class="eyebrow">Heute</p>
-            <h2>Was verschenkt wird</h2>
-            <ul>
-              <li>Der Hero wirkt eher wie ein klassischer Slider und fuehrt nicht stark genug zur Anfrage.</li>
-              <li>Die Zertifizierungen sind wichtig, aber nicht sofort als Vertrauensanker inszeniert.</li>
-              <li>Leistungen wirken nebeneinander, ohne klare Entscheidungshilfe fuer Zielgruppen.</li>
-              <li>Animationen fuehlen sich eher standardisiert an und bauen wenig Markenwert auf.</li>
-            </ul>
-          </div>
-          <div class="compare-panel after">
-            <p class="eyebrow">Demo</p>
-            <h2>Was die neue Seite staerker macht</h2>
-            <ul>
-              <li>Direkter Nutzen im ersten View: Sicherheit, Vertrauen, regionale Expertise.</li>
-              <li>Kennzahlen, VdS und Service werden sichtbar, bevor Nutzer scrollen müssen.</li>
-              <li>Leistungsbereiche erhalten Bilder, kurze Erklärungen und eine klare Dramaturgie.</li>
-              <li>Subtile Motion wirkt technisch, hochwertig und nicht nach Template-Effekt.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section tight">
-        <div class="container quote-band reveal">
-          <div>
-            <img class="seal" src="https://www.kugler-alarm.de/wp-content/uploads/2022/09/VdS_Pruefsiegel_Kugler-Alarm_Hilden.png" alt="VdS Prüfsiegel KUGLER-ALARM">
-          </div>
-          <div>
-            <p class="eyebrow">Vertrauen sichtbar machen</p>
-            <h2>Geprüfte Qualität sollte nicht im Footer versteckt sein.</h2>
-            <p class="lead">Gerade im Sicherheitsbereich kaufen Menschen nicht nur Technik, sondern Verlässlichkeit. Deshalb stellt die Demo Prüfzeichen, Erfahrung und Betreuung sichtbar neben die Leistungen.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="kontakt">
-        <div class="container contact-panel">
-          <div class="contact-info reveal">
-            <p class="eyebrow">Kontakt</p>
-            <h2>Sicherheitsbedarf besprechen.</h2>
-            <p>KUGLER-ALARM GmbH<br>Forststraße 37<br>40721 Hilden</p>
-            <p><strong>Telefon:</strong> <a href="tel:+492103248990">02103 24 899-0</a><br><strong>E-Mail:</strong> <a href="mailto:info@kugler-alarm.de">info@kugler-alarm.de</a></p>
-            <div class="inline-actions">
-              <a class="button" href="tel:+492103248990">Jetzt anrufen</a>
-              <a class="ghost-button" href="mailto:info@kugler-alarm.de">E-Mail senden</a>
+    <section id="page-contact" class="page" aria-labelledby="contact-title">
+      <div class="section">
+        <div class="container contact-shell">
+          <div class="contact-note reveal">
+            <p class="kicker">Kontakt</p>
+            <h2 id="contact-title">Lassen Sie uns über Sicherheit sprechen.</h2>
+            <p class="lead">Die Originalseite setzt stark auf persönlichen Kontakt. Diese Demo übersetzt das in ein ruhiges Anfrageformular, das zuerst die Situation klärt: Zuhause, Unternehmen, Branche, Schutzbedarf und gewünschter Rückkontakt.</p>
+            <div class="proof-row" aria-label="Kontaktkontext">
+              <div class="proof">
+                <strong>01</strong>
+                <span>Objektart wählen</span>
+              </div>
+              <div class="proof">
+                <strong>02</strong>
+                <span>Schutzbedarf nennen</span>
+              </div>
+              <div class="proof">
+                <strong>03</strong>
+                <span>persönliche Beratung erhalten</span>
+              </div>
+              <div class="proof">
+                <strong>04</strong>
+                <span>Sicherheitskonzept entwickeln</span>
+              </div>
             </div>
           </div>
-          <form class="contact-form reveal">
-            <label>Ihr Name<input type="text" name="name" placeholder="Max Mustermann"></label>
-            <label>Telefon oder E-Mail<input type="text" name="contact" placeholder="Rueckruf oder E-Mail"></label>
-            <label>Worum geht es?<textarea name="message" placeholder="Objekt, Sicherheitsbedarf, gewuenschter Zeitraum"></textarea></label>
-            <button class="button" type="button">Anfrage vorbereiten</button>
+
+          <form class="form-card reveal delay-1" id="contact-form" novalidate>
+            <div class="form-grid">
+              <label>
+                Name
+                <input type="text" name="name" autocomplete="name" placeholder="Ihr Name" required>
+              </label>
+              <label>
+                Unternehmen
+                <input type="text" name="company" autocomplete="organization" placeholder="Optional">
+              </label>
+              <label>
+                Objektart
+                <select name="object" required>
+                  <option value="">Bitte wählen</option>
+                  <option>Privates Wohnhaus</option>
+                  <option>Gewerbeobjekt</option>
+                  <option>Industrie oder Lager</option>
+                  <option>Praxis, Büro oder Einrichtung</option>
+                </select>
+              </label>
+              <label>
+                Rückkontakt
+                <input type="text" name="reply" autocomplete="off" placeholder="Kontakt auf Anfrage" required>
+              </label>
+              <label class="full">
+                Sicherheitsbedarf
+                <textarea name="message" placeholder="Einbruchschutz, Videoüberwachung, Brandmelder, Zutritt oder noch offen" required></textarea>
+              </label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="submit">Anfrage vorbereiten</button>
+              <a class="btn ghost" href="#home" data-link="home">Zurück zur Startseite</a>
+            </div>
+            <p class="form-success" id="form-success" role="status" aria-live="polite">Danke. Die Demo zeigt hier einen Success-State, ohne echte Daten zu senden.</p>
           </form>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <footer class="site-footer">
-      <p>your demo webseite made by inboxelevate</p>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+  <footer>
+    <p>your demo webseite made by <a href="https://inbox-elevate.de/" target="_blank" rel="noopener">inbox elevate</a></p>
+  </footer>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('[data-link]');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const form = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    let activePage = 'home';
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.16 });
+
+    function triggerReveal() {
+      const active = document.querySelector('.page.active');
+      if (!active) return;
+      active.querySelectorAll('.reveal').forEach((item) => {
+        item.classList.remove('visible');
+        revealObserver.observe(item);
+        if (item.getBoundingClientRect().top < window.innerHeight * 0.92) {
+          requestAnimationFrame(() => item.classList.add('visible'));
+        }
+      });
+    }
+
+    function setActiveNavigation(pageId) {
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.dataset.link === pageId);
+      });
+    }
+
+    function navigateTo(pageId) {
+      if (!document.getElementById(`page-${pageId}`)) pageId = 'home';
+      activePage = pageId;
+      document.body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      setActiveNavigation(pageId);
+      pages.forEach(p => {
+        p.classList.remove('active');
+        p.classList.add('exiting');
+      });
+      setTimeout(() => {
+        pages.forEach(p => p.classList.remove('exiting'));
+        document.getElementById(`page-${pageId}`).classList.add('active');
+        window.scrollTo({ top: 0 });
+        triggerReveal();
+      }, 300);
+    }
+
+    function routeFromHash() {
+      const pageId = window.location.hash.replace('#', '') || 'home';
+      navigateTo(pageId);
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const pageId = link.dataset.link;
+        if (!pageId) return;
+        event.preventDefault();
+        if (activePage === pageId) {
+          document.body.classList.remove('menu-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          return;
+        }
+        history.pushState(null, '', `#${pageId}`);
+        navigateTo(pageId);
+      });
+    });
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = document.body.classList.toggle('menu-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    window.addEventListener('hashchange', routeFromHash);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      formSuccess.classList.add('show');
+      form.reset();
+    });
+
+    routeFromHash();
+  </script>
+</body>
 </html>
