@@ -1,1922 +1,1362 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KUGLER-ALARM | Premium Demo Website</title>
-  <meta name="description" content="Premium Demo-Website fuer KUGLER-ALARM: Alarmanlagen, Sicherheitstechnik, Brandmelder, Videoüberwachung und Zutrittskontrolle aus Hilden.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --duration-fast: 0.25s;
-      --duration-normal: 0.55s;
-      --duration-slow: 0.9s;
-      --bg: #101113;
-      --bg-soft: #17191d;
-      --surface: #1f2228;
-      --surface-raised: #f8f5ef;
-      --surface-warm: #ebe4d8;
-      --text: #f7f3eb;
-      --text-dark: #161719;
-      --text-muted: rgba(247, 243, 235, 0.62);
-      --text-muted-dark: rgba(22, 23, 25, 0.62);
-      --accent: #c5161d;
-      --accent-hover: #e12a31;
-      --accent-deep: #7f1117;
-      --gold: #c8a86b;
-      --sage: #6c8379;
-      --cyan: #49ddcb;
-      --cyan-soft: rgba(73, 221, 203, 0.16);
-      --success: #78d88f;
-      --danger-soft: rgba(197, 22, 29, 0.18);
-      --border: rgba(255, 255, 255, 0.1);
-      --border-dark: rgba(22, 23, 25, 0.12);
-      --nav-bg: rgba(16, 17, 19, 0.74);
-      --hero-vignette: rgba(16, 17, 19, 0.9);
-      --hero-glow: rgba(197, 22, 29, 0.22);
-      --white-faint: rgba(255, 255, 255, 0.08);
-      --white-soft: rgba(255, 255, 255, 0.16);
-      --focus: rgba(200, 168, 107, 0.52);
-      --shadow-card: 0 18px 52px rgba(0, 0, 0, 0.16);
-      --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.12);
-      --shadow-nav: 0 16px 50px rgba(0, 0, 0, 0.18);
-      --font-display: "Syne", sans-serif;
-      --font-body: "Plus Jakarta Sans", sans-serif;
-      --max: 1200px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-width: 320px;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      letter-spacing: 0;
-    }
-
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    button {
-      border: 0;
-      cursor: pointer;
-    }
-
-    :focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 4px;
-    }
-
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      min-height: 78px;
-      padding: 14px clamp(18px, 4vw, 42px);
-      border-bottom: 1px solid var(--border);
-      background: var(--nav-bg);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow-nav);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      min-width: 0;
-    }
-
-    .brand-sign {
-      display: grid;
-      place-items: center;
-      width: 46px;
-      height: 46px;
-      border: 1px solid var(--white-soft);
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-      color: var(--text);
-      font-family: var(--font-display);
-      font-weight: 800;
-    }
-
-    .brand-logo {
-      display: block;
-      width: 142px;
-      max-width: 42vw;
-      height: auto;
-      padding: 7px 9px;
-      border: 1px solid var(--white-soft);
-      border-radius: 12px;
-      background: var(--surface-raised);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .brand:hover .brand-logo {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .brand strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.02rem;
-      line-height: 1;
-    }
-
-    .brand span:last-child {
-      display: block;
-      margin-top: 2px;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: clamp(15px, 2vw, 28px);
-    }
-
-    nav a {
-      position: relative;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 800;
-      text-decoration: none;
-      transition: color var(--duration-fast) var(--ease);
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width var(--duration-normal) var(--ease);
-    }
-
-    nav a.active,
-    nav a:hover {
-      color: var(--text);
-    }
-
-    nav a.active::after,
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .menu-toggle {
-      display: none;
-      width: 46px;
-      height: 46px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--white-faint);
-      color: var(--text);
-      transition: background var(--duration-fast) var(--ease),
-                  transform var(--duration-fast) var(--ease);
-    }
-
-    .menu-toggle:hover {
-      transform: scale(1.03);
-      background: var(--white-soft);
-    }
-
-    .menu-toggle:active {
-      transform: scale(0.98);
-    }
-
-    .menu-lines {
-      display: grid;
-      gap: 5px;
-      justify-content: center;
-    }
-
-    .menu-lines span {
-      display: block;
-      width: 19px;
-      height: 2px;
-      background: var(--text);
-      transition: transform var(--duration-fast) var(--ease),
-                  opacity var(--duration-fast) var(--ease);
-    }
-
-    body.menu-open .menu-lines span:first-child {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    body.menu-open .menu-lines span:nth-child(2) {
-      opacity: 0;
-    }
-
-    body.menu-open .menu-lines span:last-child {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    main {
-      position: relative;
-      min-height: calc(100vh - 78px);
-      overflow: hidden;
-    }
-
-    .page {
-      opacity: 0;
-      pointer-events: none;
-      position: absolute;
-      width: 100%;
-      transform: translateY(20px);
-      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
-    }
-
-    .page.active {
-      opacity: 1;
-      pointer-events: all;
-      position: relative;
-      transform: translateY(0);
-    }
-
-    .page.exiting {
-      opacity: 0;
-      transform: translateY(-12px);
-    }
-
-    .section {
-      padding: clamp(82px, 11vw, 128px) clamp(18px, 4vw, 42px);
-    }
-
-    .section.compact {
-      padding-top: clamp(74px, 9vw, 104px);
-      padding-bottom: clamp(74px, 9vw, 104px);
-    }
-
-    .container {
-      width: min(var(--max), 100%);
-      margin: 0 auto;
-    }
-
-    .hero {
-      position: relative;
-      min-height: calc(100vh - 78px);
-      display: grid;
-      align-items: end;
-      isolation: isolate;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -3;
-      background:
-        radial-gradient(circle at 76% 22%, var(--hero-glow), transparent 33%),
-        radial-gradient(circle at 18% 84%, var(--white-faint), transparent 28%),
-        linear-gradient(135deg, var(--bg), var(--surface) 52%, var(--bg-soft));
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(90deg, var(--hero-vignette), transparent 58%),
-        linear-gradient(0deg, var(--hero-vignette), transparent 46%);
-    }
-
-    .hero-art {
-      position: absolute;
-      right: clamp(-160px, -8vw, -70px);
-      top: 8vh;
-      z-index: -1;
-      width: min(720px, 85vw);
-      opacity: 0.72;
-    }
-
-    .hero-art svg {
-      width: 100%;
-      height: auto;
-    }
-
-    .hero-gridline,
-    .hero-ring,
-    .hero-panel {
-      transition: transform var(--duration-slow) var(--ease),
-                  opacity var(--duration-slow) var(--ease);
-    }
-
-    .hero:hover .hero-ring {
-      transform: translateY(-8px);
-    }
-
-    .hero:hover .hero-panel {
-      transform: translateY(8px);
-    }
-
-    .hero-inner {
-      padding-top: 80px;
-      padding-bottom: clamp(56px, 8vw, 92px);
-    }
-
-    .hero-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.78fr);
-      gap: clamp(30px, 5vw, 74px);
-      align-items: center;
-    }
-
-    .hero-copy {
-      min-width: 0;
-    }
-
-    .hero-stage {
-      position: relative;
-      min-height: 540px;
-    }
-
-    .photo-frame {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-      box-shadow: var(--shadow-card);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .photo-frame:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      min-height: 380px;
-      object-fit: cover;
-      filter: saturate(0.92) contrast(1.08);
-    }
-
-    .photo-frame::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(0deg, rgba(16, 17, 19, 0.78), transparent 48%),
-        linear-gradient(90deg, rgba(16, 17, 19, 0.46), transparent);
-    }
-
-    .status-panel {
-      position: absolute;
-      left: -24px;
-      bottom: 34px;
-      width: min(360px, 82%);
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(16, 17, 19, 0.82);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow-card);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .status-panel:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .status-panel small {
-      display: inline-flex;
-      margin-bottom: 10px;
-      color: var(--cyan);
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .status-list {
-      display: grid;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .status-list li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .status-list strong {
-      color: var(--text);
-      font-weight: 800;
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 5px rgba(120, 216, 143, 0.12);
-    }
-
-    .trust-rail {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .trust-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--white-faint);
-      color: var(--text-muted);
-      font-size: 0.84rem;
-      font-weight: 800;
-      transition: background var(--duration-fast) var(--ease),
-                  transform var(--duration-fast) var(--ease);
-    }
-
-    .trust-chip:hover {
-      transform: translateY(-4px);
-      background: var(--white-soft);
-    }
-
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 18px;
-      color: var(--gold);
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .kicker::before {
-      content: "";
-      width: 26px;
-      height: 2px;
-      background: var(--accent);
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: var(--font-display);
-      letter-spacing: 0;
-    }
-
-    h1 {
-      max-width: 980px;
-      margin-bottom: 22px;
-      font-size: clamp(3.1rem, 8.5vw, 7.6rem);
-      line-height: 0.88;
-      font-weight: 800;
-    }
-
-    h2 {
-      max-width: 820px;
-      margin-bottom: 18px;
-      font-size: clamp(2.15rem, 5vw, 4.8rem);
-      line-height: 0.96;
-      font-weight: 800;
-    }
-
-    h3 {
-      margin-bottom: 10px;
-      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-      line-height: 1.05;
-    }
-
-    p {
-      color: var(--text-muted);
-      line-height: 1.72;
-    }
-
-    .lead {
-      max-width: 720px;
-      font-size: clamp(1.05rem, 1.7vw, 1.3rem);
-    }
-
-    .light {
-      background: var(--surface-raised);
-      color: var(--text-dark);
-    }
-
-    .light p {
-      color: var(--text-muted-dark);
-    }
-
-    .light .kicker {
-      color: var(--accent-deep);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 20px;
-      border-radius: 12px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: background var(--duration-fast) var(--ease),
-                  transform var(--duration-fast) var(--ease),
-                  border-color var(--duration-fast) var(--ease),
-                  color var(--duration-fast) var(--ease);
-    }
-
-    .btn:hover {
-      transform: scale(1.03);
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .btn.primary {
-      background: var(--accent);
-      color: var(--text);
-    }
-
-    .btn.primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn.ghost {
-      border: 1px solid var(--border);
-      background: var(--white-faint);
-      color: var(--text);
-    }
-
-    .light .btn.ghost {
-      border-color: var(--border-dark);
-      background: transparent;
-      color: var(--text-dark);
-    }
-
-    .proof-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1px;
-      margin-top: 58px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--border);
-    }
-
-    .proof {
-      min-height: 126px;
-      padding: 22px;
-      background: var(--white-faint);
-      backdrop-filter: blur(12px);
-    }
-
-    .proof strong {
-      display: block;
-      margin-bottom: 9px;
-      color: var(--text);
-      font-family: var(--font-display);
-      font-size: clamp(1.9rem, 3vw, 3.2rem);
-      line-height: 1;
-    }
-
-    .proof span {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.45;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: clamp(28px, 6vw, 84px);
-      align-items: center;
-    }
-
-    .story-panel {
-      position: relative;
-      padding: clamp(24px, 4vw, 42px);
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      background:
-        linear-gradient(135deg, var(--surface-raised), var(--surface-warm));
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-    }
-
-    .story-panel::after {
-      content: "";
-      position: absolute;
-      inset: auto -10% -28% 28%;
-      height: 220px;
-      border-radius: 50%;
-      background: var(--hero-glow);
-      transition: transform var(--duration-slow) var(--ease);
-    }
-
-    .story-panel:hover::after {
-      transform: translateY(-10px);
-    }
-
-    .timeline {
-      display: grid;
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 88px 1fr;
-      gap: 18px;
-      align-items: start;
-      padding: 18px;
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      background: var(--surface-raised);
-    }
-
-    .timeline-item strong {
-      color: var(--accent);
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-    }
-
-    .timeline-item p {
-      margin-bottom: 0;
-    }
-
-    .mission-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 28px;
-    }
-
-    .mission-pill {
-      min-height: 92px;
-      padding: 16px;
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      background: var(--surface-raised);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .mission-pill:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .mission-pill strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--accent);
-      font-family: var(--font-display);
-    }
-
-    .mission-pill span {
-      color: var(--text-muted-dark);
-      font-size: 0.84rem;
-      line-height: 1.45;
-    }
-
-    .leader-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .leader-card {
-      padding: 20px;
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      background: var(--surface-raised);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .leader-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .leader-card strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--accent);
-      font-family: var(--font-display);
-    }
-
-    .leader-card p {
-      margin-bottom: 0;
-      font-size: 0.92rem;
-    }
-
-    .grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .grid.three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .grid.four {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 1px;
-      margin-bottom: 34px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--border);
-    }
-
-    .flow-step {
-      min-height: 138px;
-      padding: 18px;
-      background: var(--surface);
-      transition: background var(--duration-fast) var(--ease),
-                  transform var(--duration-fast) var(--ease);
-    }
-
-    .flow-step:hover {
-      background: var(--bg-soft);
-      transform: translateY(-4px);
-    }
-
-    .flow-step strong {
-      display: block;
-      margin-bottom: 18px;
-      color: var(--gold);
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-    }
-
-    .flow-step span {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.45;
-    }
-
-    .security-console {
-      display: grid;
-      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-      gap: 20px;
-      align-items: stretch;
-      margin-bottom: 28px;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background:
-        radial-gradient(circle at 84% 28%, var(--cyan-soft), transparent 34%),
-        var(--surface);
-      box-shadow: var(--shadow-card);
-    }
-
-    .console-copy {
-      padding: 14px;
-    }
-
-    .console-copy h3 {
-      color: var(--text);
-    }
-
-    .console-map {
-      position: relative;
-      min-height: 280px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background:
-        linear-gradient(90deg, var(--white-faint) 1px, transparent 1px),
-        linear-gradient(var(--white-faint) 1px, transparent 1px),
-        rgba(255, 255, 255, 0.03);
-      background-size: 42px 42px;
-    }
-
-    .console-route {
-      position: absolute;
-      left: 12%;
-      right: 12%;
-      top: 48%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--accent), var(--gold));
-      transform: rotate(-8deg);
-      transform-origin: center;
-      transition: transform var(--duration-slow) var(--ease);
-    }
-
-    .security-console:hover .console-route {
-      transform: rotate(-4deg) scaleX(1.05);
-    }
-
-    .console-node {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--cyan);
-      border-radius: 50%;
-      background: var(--surface);
-      box-shadow: 0 0 0 8px var(--cyan-soft);
-      transition: transform var(--duration-fast) var(--ease),
-                  border-color var(--duration-fast) var(--ease);
-    }
-
-    .console-node:hover {
-      transform: scale(1.18);
-      border-color: var(--gold);
-    }
-
-    .console-node.one { left: 14%; top: 30%; }
-    .console-node.two { left: 35%; top: 56%; }
-    .console-node.three { left: 62%; top: 24%; }
-    .console-node.four { left: 80%; top: 58%; }
-
-    .console-alert {
-      position: absolute;
-      left: 18px;
-      bottom: 18px;
-      right: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(16, 17, 19, 0.8);
-      backdrop-filter: blur(14px);
-    }
-
-    .console-alert strong {
-      color: var(--text);
-    }
-
-    .console-alert span {
-      color: var(--success);
-      font-size: 0.82rem;
-      font-weight: 800;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 28px;
-      margin-bottom: 34px;
-    }
-
-    .section-head p {
-      max-width: 470px;
-      margin-bottom: 0;
-    }
-
-    .card {
-      position: relative;
-      min-height: 242px;
-      padding: 26px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: linear-gradient(180deg, var(--white-faint), transparent);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .light .card {
-      border-color: var(--border-dark);
-      background: var(--surface-raised);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent), var(--gold), var(--sage));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--duration-fast) var(--ease);
-    }
-
-    .card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .icon {
-      display: grid;
-      place-items: center;
-      width: 52px;
-      height: 52px;
-      margin-bottom: 22px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--white-faint);
-      color: var(--gold);
-    }
-
-    .light .icon {
-      border-color: var(--border-dark);
-      background: var(--surface-warm);
-      color: var(--accent);
-    }
-
-    .icon svg {
-      width: 26px;
-      height: 26px;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .card p {
-      margin-bottom: 0;
-    }
-
-    .card small {
-      display: inline-flex;
-      margin-bottom: 14px;
-      color: var(--gold);
-      font-size: 0.76rem;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .card:nth-child(1) {
-      transition-delay: 0ms;
-    }
-
-    .card:nth-child(2) {
-      transition-delay: 100ms;
-    }
-
-    .card:nth-child(3) {
-      transition-delay: 200ms;
-    }
-
-    .card:nth-child(4) {
-      transition-delay: 300ms;
-    }
-
-    .card:nth-child(5) {
-      transition-delay: 100ms;
-    }
-
-    .card:nth-child(6) {
-      transition-delay: 200ms;
-    }
-
-    .advantage {
-      padding: 28px;
-      border-radius: 12px;
-      background: var(--surface-raised);
-      color: var(--text-dark);
-    }
-
-    .advantage strong {
-      display: block;
-      margin-bottom: 10px;
-      color: var(--accent);
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      line-height: 1;
-    }
-
-    .quote {
-      grid-column: span 2;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: clamp(28px, 4vw, 42px);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background:
-        radial-gradient(circle at 82% 22%, var(--hero-glow), transparent 36%),
-        var(--surface);
-      box-shadow: var(--shadow-card);
-    }
-
-    .quote blockquote {
-      margin: 0;
-      color: var(--text);
-      font-family: var(--font-display);
-      font-size: clamp(1.65rem, 3vw, 3.1rem);
-      line-height: 1.08;
-    }
-
-    .quote cite {
-      margin-top: 26px;
-      color: var(--text-muted);
-      font-style: normal;
-      font-weight: 800;
-    }
-
-    .trust-card {
-      padding: 28px;
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      background: var(--surface-raised);
-      color: var(--text-dark);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .trust-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .trust-card strong {
-      display: block;
-      margin-bottom: 10px;
-      color: var(--accent);
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-    }
-
-    .trust-card p {
-      margin-bottom: 0;
-    }
-
-    .client-wall {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 28px;
-    }
-
-    .client-pill {
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      padding: 13px 14px;
-      border: 1px solid var(--border-dark);
-      border-radius: 12px;
-      background: var(--surface-raised);
-      color: var(--text-muted-dark);
-      font-size: 0.84rem;
-      font-weight: 800;
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .client-pill:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .contact-shell {
-      display: grid;
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .contact-note,
-    .form-card {
-      padding: clamp(26px, 4vw, 44px);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: linear-gradient(180deg, var(--white-faint), transparent);
-      box-shadow: var(--shadow-card);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    label {
-      display: grid;
-      gap: 8px;
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 800;
-    }
-
-    label.full {
-      grid-column: 1 / -1;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--white-faint);
-      color: var(--text);
-      min-height: 48px;
-      padding: 13px 14px;
-      transition: border-color var(--duration-fast) var(--ease),
-                  background var(--duration-fast) var(--ease);
-    }
-
-    select {
-      color: var(--text);
-    }
-
-    textarea {
-      min-height: 132px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--gold);
-      background: var(--white-soft);
-      outline: 0;
-    }
-
-    .form-success {
-      min-height: 24px;
-      margin-top: 16px;
-      color: var(--gold);
-      font-weight: 800;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity var(--duration-fast) var(--ease),
-                  transform var(--duration-fast) var(--ease);
-    }
-
-    .form-success.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity var(--duration-normal) var(--ease),
-                  transform var(--duration-normal) var(--ease);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal.delay-1 {
-      transition-delay: 100ms;
-    }
-
-    .reveal.delay-2 {
-      transition-delay: 200ms;
-    }
-
-    .reveal.delay-3 {
-      transition-delay: 300ms;
-    }
-
-    .fab {
-      position: fixed;
-      bottom: 34px;
-      right: 34px;
-      z-index: 99;
-      display: grid;
-      place-items: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-      color: var(--text);
-      box-shadow: 0 8px 32px rgba(197, 22, 29, 0.4);
-      transition: transform var(--duration-fast) var(--ease),
-                  box-shadow var(--duration-fast) var(--ease);
-    }
-
-    .fab:hover {
-      transform: translateY(-6px) scale(1.05);
-      box-shadow: 0 12px 42px rgba(197, 22, 29, 0.6);
-    }
-
-    .fab svg {
-      width: 28px;
-      height: 28px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    @media (max-width: 980px) {
-      padding: 34px clamp(18px, 4vw, 42px);
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-      text-align: center;
-    }
-
-    footer p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-    }
-
-    footer a {
-      color: var(--gold);
-      font-weight: 800;
-      text-decoration: none;
-      transition: color var(--duration-fast) var(--ease);
-    }
-
-    footer a:hover {
-      color: var(--text);
-    }
-
-    @media (max-width: 980px) {
-      .menu-toggle {
-        display: grid;
-        place-items: center;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 78px;
-        left: 14px;
-        right: 14px;
-        z-index: 49;
-        display: grid;
-        gap: 0;
-        padding: 12px;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        background: var(--surface);
-        box-shadow: var(--shadow-nav);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-12px);
-        transition: opacity var(--duration-fast) var(--ease),
-                    transform var(--duration-fast) var(--ease);
-      }
-
-      body.menu-open .nav-links {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
-      }
-
-      .nav-links a {
-        padding: 15px 12px;
-      }
-
-      .nav-links a::after {
-        bottom: 9px;
-        left: 12px;
-      }
-
-      .proof-row,
-      .grid.three,
-      .grid.four,
-      .flow,
-      .mission-grid,
-      .leader-grid,
-      .security-console,
-      .hero-layout,
-      .split,
-      .contact-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .client-wall {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .section-head {
-        display: block;
-      }
-
-      .quote {
-        grid-column: auto;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .brand span:last-child {
-        display: none;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-art {
-        top: 22vh;
-        right: -220px;
-        opacity: 0.42;
-      }
-
-      .proof-row {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .client-wall {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-stage {
-        min-height: auto;
-      }
-
-      .status-panel {
-        position: relative;
-        left: auto;
-        bottom: auto;
-        width: 100%;
-        margin-top: 12px;
-      }
-
-      .proof {
-        min-height: 112px;
-        padding: 17px;
-      }
-
-      .timeline-item,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .actions {
-        display: grid;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUGLER-ALARM - Sicherheit für Ihr Zuhause und Unternehmen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #0066cc;
+            --accent: #ff6600;
+            --light: #f8f9fa;
+            --dark: #333333;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: #e05a00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+        
+        .form-success {
+            display: none;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            margin-top: 15px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .text-muted {
+            color: var(--gray);
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .page.exiting {
+            animation: fadeOut 0.35s forwards;
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 25px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--gray);
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav class="site-nav" aria-label="Hauptnavigation">
-    <a class="brand" href="#home" data-link="home" aria-label="KUGLER-ALARM Startseite">
-      <img class="brand-logo" src="https://www.kugler-alarm.de/wp-content/uploads/2022/12/logo-kugler-alarm-hilden-duesseldorf.png" alt="KUGLER-ALARM Logo">
-      <span>
-        <strong>KUGLER-ALARM</strong>
-        <span>Sicherheitstechnik Hilden</span>
-      </span>
-    </a>
-
-    <div class="nav-links" id="nav-links">
-      <a href="#home" data-link="home" class="active">Home</a>
-      <a href="#about" data-link="about">Über uns</a>
-      <a href="#services" data-link="services">Leistungen</a>
-      <a href="#references" data-link="references">Vorteile</a>
-      <a href="#contact" data-link="contact">Kontakt</a>
-    </div>
-
-    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-links">
-      <span class="menu-lines" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-    </button>
-  </nav>
-
-  <main>
-    <section id="page-home" class="page active" aria-labelledby="home-title">
-      <div class="hero">
-        <div class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 720 720" role="img">
-            <defs>
-              <linearGradient id="shieldGradient" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="var(--accent)"></stop>
-                <stop offset="1" stop-color="var(--gold)"></stop>
-              </linearGradient>
-            </defs>
-            <g class="hero-ring" opacity="0.34">
-              <circle cx="360" cy="360" r="318" stroke="var(--white-soft)" stroke-width="1" fill="none"></circle>
-              <circle cx="360" cy="360" r="246" stroke="var(--white-soft)" stroke-width="1" fill="none"></circle>
-              <circle cx="360" cy="360" r="172" stroke="var(--white-soft)" stroke-width="1" fill="none"></circle>
-            </g>
-            <g class="hero-gridline" opacity="0.28">
-              <path d="M78 360H642M360 78V642M162 162l396 396M558 162 162 558" stroke="var(--white-soft)" stroke-width="1"></path>
-            </g>
-            <g class="hero-panel">
-              <path d="M360 104 554 178v150c0 129-73 224-194 287-121-63-194-158-194-287V178l194-74Z" fill="var(--surface)" stroke="url(#shieldGradient)" stroke-width="8"></path>
-              <path d="M282 362 334 414 452 292" stroke="url(#shieldGradient)" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M246 220h228M246 508h228" stroke="var(--white-soft)" stroke-width="2"></path>
-            </g>
-          </svg>
+    <header>
+        <div class="header-container container">
+            <a href="#" class="logo">KUGLER<span>-ALARM</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Leistungen</a></li>
+                <li><a href="#about">Über uns</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
+    </header>
 
-        <div class="container hero-inner">
-          <div class="hero-layout">
-            <div class="hero-copy">
-              <p class="kicker reveal">Sicherheitstechnik und Alarmanlagen aus Hilden</p>
-              <h1 id="home-title" class="reveal delay-1">Der beste Schutz ist Teamwork.</h1>
-              <p class="lead reveal delay-2"><strong>Wir schützen Menschen und Werte.</strong> Seit 2004 entwickelt KUGLER-ALARM maßgeschneiderte Sicherheitslösungen für Unternehmen und private Haushalte. Persönliche Beratung, zertifizierte Expertise und Full-Service machen aus Technik ein verlässliches Sicherheitskonzept.</p>
-              <div class="trust-rail reveal delay-2" aria-label="Trust Signals">
-                <span class="trust-chip">VdS anerkannt</span>
-                <span class="trust-chip">LKA-Errichterverzeichnis</span>
-                <span class="trust-chip">DIN 14675</span>
-                <span class="trust-chip">QM-zertifiziert</span>
-              </div>
-              <div class="actions reveal delay-3">
-                <a class="btn primary" href="#contact" data-link="contact">Sicherheitscheck anfragen</a>
-                <a class="btn ghost" href="#services" data-link="services">Leistungen ansehen</a>
-              </div>
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>Schützen Sie Ihr Zuhause und Ihre Unternehmen</h1>
+                <p>KUGLER-ALARM bietet maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen. Wir bieten moderne Alarmanlagen, Videoüberwachung und professionelle Sicherheitsberatung.</p>
+                <a href="#contact" class="btn">Kontakt aufnehmen</a>
             </div>
-
-            <div class="hero-stage reveal delay-2" aria-label="KUGLER-ALARM Projektierung">
-              <div class="photo-frame">
-                <img src="https://www.kugler-alarm.de/wp-content/uploads/2024/07/das-team-von-kugler-alarm-bei-der-projektierung-neu.webp" alt="KUGLER-ALARM Team bei der Projektierung">
-              </div>
-              <aside class="status-panel" aria-label="Sicherheitsstatus">
-                <small>Secure-by-Design</small>
-                <ul class="status-list">
-                  <li><span>Beratung</span><strong>aktiv</strong><span class="status-dot" aria-hidden="true"></span></li>
-                  <li><span>Projektierung</span><strong>geprüft</strong><span class="status-dot" aria-hidden="true"></span></li>
-                  <li><span>Wartung</span><strong>24/7</strong><span class="status-dot" aria-hidden="true"></span></li>
-                </ul>
-              </aside>
-            </div>
-          </div>
-
-          <div class="proof-row reveal delay-3" aria-label="KUGLER-ALARM Fakten">
-            <div class="proof">
-              <strong>2004</strong>
-              <span>vertrauensvoller Ansprechpartner seit Gründung</span>
-            </div>
-            <div class="proof">
-              <strong>4.800+</strong>
-              <span>realisierte Sicherheitsprojekte</span>
-            </div>
-            <div class="proof">
-              <strong>24/7</strong>
-              <span>Service und schnelle Hilfe im Betrieb</span>
-            </div>
-            <div class="proof">
-              <strong>VdS</strong>
-              <span>regelmäßig geprüfte Qualität</span>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="page-about" class="page light" aria-labelledby="about-title">
-      <div class="section">
-        <div class="container split">
-          <div>
-            <p class="kicker reveal">Über uns</p>
-            <h2 id="about-title" class="reveal delay-1">Gemeinsam stark für Ihre Sicherheit.</h2>
-            <p class="lead reveal delay-2">Sicherheit ist Vertrauenssache. KUGLER-ALARM verbindet modernste Sicherheitstechnik mit kurzen Entscheidungswegen, persönlicher Beratung und einem Full-Service-Angebot von der Analyse bis zur Wartung.</p>
-            <div class="actions reveal delay-3">
-              <a class="btn primary" href="#services" data-link="services">Systeme entdecken</a>
-              <a class="btn ghost" href="#contact" data-link="contact">Projekt besprechen</a>
-            </div>
-          </div>
-
-          <article class="story-panel reveal delay-2">
-            <h3>Ihr Vertrauen in besten Händen</h3>
-            <p>Als Komplett-Anbieter punktet KUGLER-ALARM mit zügiger Abwicklung, individuell passenden Sicherheitskonzepten, professioneller Installation und fachkundiger Wartung. Genau dieser Full-Service wird hier klarer, ruhiger und hochwertiger inszeniert.</p>
-            <div class="timeline" aria-label="Unternehmensfakten">
-              <div class="timeline-item">
-                <strong>Analyse</strong>
-                <p>Bedarf, Richtlinien, Wünsche und Budget werden gemeinsam bewertet.</p>
-              </div>
-              <div class="timeline-item">
-                <strong>Konzept</strong>
-                <p>Ein Sicherheitskonzept entsteht passend zu Zuhause, Unternehmen oder Branche.</p>
-              </div>
-              <div class="timeline-item">
-                <strong>Betrieb</strong>
-                <p>Montage, Einweisung, Wartung und Service sichern die Anlage langfristig ab.</p>
-              </div>
-            </div>
-            <div class="leader-grid" aria-label="Geschäftsführung">
-              <div class="leader-card">
-                <strong>Birgit Kugler</strong>
-                <p>Seit 2004 vertrauensvolle Ansprechpartnerin. Ihr Versprechen: Effizienz, Vertrauen und kurze Entscheidungswege.</p>
-              </div>
-              <div class="leader-card">
-                <strong>Mario Griszewski</strong>
-                <p>Steht für den Full-Service-Anspruch: Konzept, Installation, Wartung und schnelle Hilfe im Störungsfall.</p>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="container mission-grid reveal delay-3" aria-label="Mission von KUGLER-ALARM">
-          <div class="mission-pill"><strong>kompetent</strong><span>Experten finden die passende Sicherheitslösung.</span></div>
-          <div class="mission-pill"><strong>zuverlässig</strong><span>Schutz, auf den man sich jederzeit verlassen kann.</span></div>
-          <div class="mission-pill"><strong>organisiert</strong><span>Kurze Wege machen den Full-Service einfach.</span></div>
-          <div class="mission-pill"><strong>achtsam</strong><span>Sorgfalt in Beratung, Montage und Betreuung.</span></div>
-          <div class="mission-pill"><strong>kundennah</strong><span>Vertrauensvoller Austausch von Mensch zu Mensch.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="page-services" class="page" aria-labelledby="services-title">
-      <div class="section">
+        
         <div class="container">
-          <div class="section-head">
-            <div>
-              <p class="kicker reveal">Leistungen</p>
-              <h2 id="services-title" class="reveal delay-1">Von der sicheren Beratung bis zur regelmäßigen Wartung.</h2>
+            <div class="section-title">
+                <h2>Unsere Leistungen</h2>
+                <p>Wir bieten umfassende Sicherheitslösungen für alle Ihre Bedürfnisse</p>
             </div>
-            <p class="reveal delay-2">Die aktuelle Website hat den richtigen Ablauf bereits. Diese Demo macht ihn als klares Beratungssystem sichtbar und verknüpft ihn direkt mit den passenden Sicherheitslösungen.</p>
-          </div>
-
-          <div class="flow reveal delay-2" aria-label="Full-Service Ablauf">
-            <div class="flow-step"><strong>01</strong><span>Analyse von Zielen, Wünschen, Budget, Normen und Richtlinien.</span></div>
-            <div class="flow-step"><strong>02</strong><span>Persönliche Beratung mit Fachwissen, Erfahrung und Ideen.</span></div>
-            <div class="flow-step"><strong>03</strong><span>Projektierung mit abgestimmten Komponenten und Vorschriften im Blick.</span></div>
-            <div class="flow-step"><strong>04</strong><span>Sorgfältige Montage bis zur betriebsfertigen Übergabe.</span></div>
-            <div class="flow-step"><strong>05</strong><span>Service bei Fragen, Erweiterungen oder Störungsfällen.</span></div>
-            <div class="flow-step"><strong>06</strong><span>Wartung und Instandhaltung für zuverlässige Funktion.</span></div>
-          </div>
-
-          <div class="security-console reveal delay-3" aria-label="Simuliertes Sicherheitscockpit">
-            <div class="console-copy">
-              <p class="kicker">Modernisierungsidee</p>
-              <h3>Sicherheitscockpit statt austauschbarer Slider.</h3>
-              <p>Die Originalseite zeigt viele starke Themen. In dieser Demo werden sie in eine klare Kontrolllogik übersetzt: Systeme, Standorte, Service und Wartung wirken wie ein vernetztes Sicherheitskonzept.</p>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Privatanschutz</h3>
+                    <p>Maßgeschneiderte Alarmanlagen für Ihre Privatwohnung oder Ihr Haus</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Gewerbliche Sicherheit</h3>
+                    <p>Professionelle Sicherheitslösungen für Unternehmen und Büros</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Videoüberwachung</h3>
+                    <p>Komplette Videoüberwachungssysteme mit HD-Kameras</p>
+                </div>
             </div>
-            <div class="console-map" aria-hidden="true">
-              <span class="console-route"></span>
-              <span class="console-node one"></span>
-              <span class="console-node two"></span>
-              <span class="console-node three"></span>
-              <span class="console-node four"></span>
-              <div class="console-alert">
-                <strong>Objektstatus: geschützt</strong>
-                <span>Service bereit</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid three" aria-label="Leistungskarten">
-            <article class="card reveal">
-              <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-3Z"></path><path d="m8.8 12.2 2.2 2.2 4.5-5"></path></svg>
-              </div>
-              <small>Unternehmen und Zuhause</small>
-              <h3>Einbruchmeldeanlagen</h3>
-              <p>Frühzeitige Erkennung und zuverlässiger Schutz vor Einbrüchen, abgestimmt auf Gebäude, Risiko und Alltag.</p>
-            </article>
-
-            <article class="card reveal">
-              <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 8h12l4 4-4 4H4V8Z"></path><path d="M8 12h.1M12 12h.1"></path></svg>
-              </div>
-              <small>Alles im Blick</small>
-              <h3>Videoüberwachung</h3>
-              <p>Individuelle Lösungen für Unternehmen und Zuhause, damit relevante Bereiche jederzeit nachvollziehbar bleiben.</p>
-            </article>
-
-            <article class="card reveal">
-              <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 3c3 3 5 5.5 5 9a5 5 0 0 1-10 0c0-2.4 1.2-4.6 3-6.8"></path><path d="M12 13c1.2 1.2 1.5 2 1.5 3a1.5 1.5 0 0 1-3 0c0-.9.4-1.8 1.5-3Z"></path></svg>
-              </div>
-              <small>Richtlinien im Griff</small>
-              <h3>Brandmelde-Systeme</h3>
-              <p>Brandrisiken minimieren, Werte schützen und die wichtigen Bestimmungen professionell berücksichtigen.</p>
-            </article>
-
-            <article class="card reveal">
-              <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 11V8a4 4 0 0 1 8 0v3"></path><path d="M6 11h12v10H6z"></path><path d="M12 15v2"></path></svg>
-              </div>
-              <small>Zugang steuern</small>
-              <h3>Zutrittskontrolle</h3>
-              <p>Damit klar bleibt, wer ein- und ausgeht. Kombinierbar mit weiteren Sicherheitskomponenten.</p>
-            </article>
-
-            <article class="card reveal">
-              <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0"></path><path d="M8 12a4 4 0 0 1 8 0"></path><path d="M12 12h.1"></path><path d="M4 18h16"></path></svg>
-              </div>
-              <small>Nachrüstbar</small>
-              <h3>Funkalarm</h3>
-              <p>Sicherer Schutz mit einfacher Installation ohne Stemmarbeiten, erweiterbar und bequem steuerbar.</p>
-            </article>
-
-            <article class="card reveal">
-              <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 3v6h-6"></path></svg>
-              </div>
-              <small>Langfristig sicher</small>
-              <h3>Service und Wartung</h3>
-              <p>Regelmäßige Prüfungen, schnelle Erreichbarkeit und langfristige Betreuung halten Systeme im Alltag zuverlässig.</p>
-            </article>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section id="page-references" class="page light" aria-labelledby="references-title">
-      <div class="section">
+    <section id="services" class="page">
         <div class="container">
-          <div class="section-head">
-            <div>
-              <p class="kicker reveal">Referenzen und Vertrauen</p>
-              <h2 id="references-title" class="reveal delay-1">Sichere Lösungen, angepasst an Branche und Zuhause.</h2>
+            <div class="section-title">
+                <h2>Unsere Services</h2>
+                <p>Umfassende Sicherheitslösungen für Privatpersonen und Unternehmen</p>
             </div>
-            <p class="reveal delay-2">Die Originalseite nennt viele starke Einsatzfelder. In der Demo werden sie klarer als Social Proof und Orientierung genutzt: Unternehmen, Zuhause, Schulen, Hotels, Banken, Museen, Praxen und Einzelhandel.</p>
-          </div>
-
-          <div class="grid four">
-            <article class="advantage reveal">
-              <strong>4.800+</strong>
-              <p>Projekte zeigen, dass KUGLER-ALARM nicht nur Konzepte entwickelt, sondern Sicherheit im Alltag umsetzt.</p>
-            </article>
-            <article class="advantage reveal">
-              <strong>VdS</strong>
-              <p>Das Prüfsiegel wird in dieser Demo sichtbar in die Entscheidung eingebunden, statt im Seitenfluss unterzugehen.</p>
-            </article>
-            <article class="advantage reveal">
-              <strong>DIN</strong>
-              <p>DIN 14675 und DIN EN 16763 werden als Vertrauensanker für Planung, Betrieb und Qualität positioniert.</p>
-            </article>
-            <article class="advantage reveal">
-              <strong>24/7</strong>
-              <p>Service wird als dauerhaftes Sicherheitsversprechen kommuniziert, nicht nur als kurzer Kontakt-Hinweis.</p>
-            </article>
-            <article class="quote reveal delay-1">
-              <blockquote>„Zertifizierte Qualität schafft Vertrauen.“</blockquote>
-              <cite>VdS-anerkannt, LKA-Errichterverzeichnis und regelmäßig geprüfte Qualität</cite>
-            </article>
-            <article class="trust-card reveal delay-2"><strong>Schulen</strong><p>Amokalarm und Sicherheitskonzepte für besondere Schutzanforderungen.</p></article>
-            <article class="trust-card reveal delay-3"><strong>Hotels</strong><p>Sicherheitssysteme für Gäste, Mitarbeitende und sensible Betriebsbereiche.</p></article>
-            <article class="trust-card reveal"><strong>Banken</strong><p>Hohe Anforderungen an Zutritt, Alarmierung und Nachvollziehbarkeit.</p></article>
-            <article class="trust-card reveal delay-1"><strong>Museen</strong><p>Sicherheitskonzepte für Werte, Ausstellungen und Besucherströme.</p></article>
-            <article class="trust-card reveal delay-2"><strong>Arztpraxen</strong><p>Einbruchschutz und Zugangskontrolle für sensible Praxisbereiche.</p></article>
-            <article class="trust-card reveal delay-3"><strong>Einzelhandel</strong><p>Videoüberwachung und Schutz für Verkaufsflächen und Lager.</p></article>
-            <article class="trust-card reveal"><strong>DAITEM Profi Partner</strong><p>Kompetenz für moderne Funkalarm- und Meldetechnik.</p></article>
-            <article class="trust-card reveal delay-1"><strong>ESSER FlexES Partner</strong><p>Fachwissen für Brandmelde- und Gebäudesicherheit.</p></article>
-            <article class="trust-card reveal delay-2"><strong>QM-zertifiziert</strong><p>Geprüfte Qualität in Arbeit, Organisation und Service.</p></article>
-            <article class="trust-card reveal delay-3"><strong>VdS Fachfirma</strong><p>Anerkannt für Brandmelde- und Sicherheitsanlagen.</p></article>
-          </div>
-
-          <div class="client-wall reveal delay-2" aria-label="Auszug Referenzen">
-            <div class="client-pill">LVR Archäologischer Park Xanten</div>
-            <div class="client-pill">Clemens Sels Museum Neuss</div>
-            <div class="client-pill">Medizinischer Dienst Nordrhein</div>
-            <div class="client-pill">Rheinland Klinikum</div>
-            <div class="client-pill">Stadt Neuss</div>
-            <div class="client-pill">Stadt Bochum</div>
-            <div class="client-pill">Stadt Ratingen</div>
-            <div class="client-pill">Stadtwerke Bochum</div>
-            <div class="client-pill">Bankhaus HAL</div>
-            <div class="client-pill">EDEKA Hein</div>
-            <div class="client-pill">Haaner Felsenquelle</div>
-            <div class="client-pill">Schley's Gartencenter</div>
-            <div class="client-pill">Spedition Dörrenhaus</div>
-            <div class="client-pill">Hans Brandenburg</div>
-            <div class="client-pill">Wera</div>
-            <div class="client-pill">Tuppenhof</div>
-          </div>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3>Alarmanlagen</h3>
+                    <p>Wir bieten moderne, zuverlässige Alarmanlagen für alle Arten von Immobilien. Unsere Systeme sind einfach zu bedienen und bieten umfassenden Schutz.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>24-Stunden-Überwachung</li>
+                        <li>Mobile Benachrichtigungen</li>
+                        <li>Integration mit Smart Home Systemen</li>
+                        <li>Professionelle Installation</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Videoüberwachung</h3>
+                    <p>Komplette Videoüberwachungssysteme mit HD-Kameras für Innen- und Außenbereiche. Unsere Systeme bieten klare Aufnahmen und intelligente Erkennungsfunktionen.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>HD-Kameras mit Nachtsehen</li>
+                        <li>Mobile App für Live-Überwachung</li>
+                        <li>Intelligente Bewegungserkennung</li>
+                        <li>Cloud-Speicherung</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Sicherheitsberatung</h3>
+                    <p>Professionelle Sicherheitsberatung für Unternehmen und Privatpersonen. Wir analysieren Ihre Sicherheitsbedürfnisse und entwickeln maßgeschneiderte Lösungen.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Sicherheitsaudit</li>
+                        <li>Risikobewertung</li>
+                        <li>Personalisierte Lösungen</li>
+                        <li>Regelmäßige Überprüfung</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Wartung & Support</h3>
+                    <p>Regelmäßige Wartung und technischer Support für alle unsere Sicherheitssysteme. Wir garantieren die optimale Funktionalität Ihrer Anlagen.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Regelmäßige Wartung</li>
+                        <li>24/7 Support</li>
+                        <li>Software-Updates</li>
+                        <li>Technische Beratung</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="page-contact" class="page" aria-labelledby="contact-title">
-      <div class="section">
-        <div class="container contact-shell">
-          <div class="contact-note reveal">
-            <p class="kicker">Kontakt</p>
-            <h2 id="contact-title">Lassen Sie uns über Sicherheit sprechen.</h2>
-            <p class="lead">Rufen Sie uns noch heute an unter <a href="tel:+492103248990" style="color:var(--accent); font-weight:800; text-decoration:none;">02103 248990</a> oder schreiben Sie uns an <a href="mailto:info@kugler-alarm.de" style="color:var(--accent); font-weight:800; text-decoration:none;">info@kugler-alarm.de</a>. Wir sind 24/7 für Sie da!</p>
-            <p style="color: var(--text-muted); margin-bottom: 24px;">Die Originalseite setzt stark auf persönlichen Kontakt. Diese Demo übersetzt das in ein ruhiges Anfrageformular, das zuerst die Situation klärt.</p>
-            <div class="proof-row" aria-label="Kontaktkontext">
-              <div class="proof">
-                <strong>01</strong>
-                <span>Objektart wählen</span>
-              </div>
-              <div class="proof">
-                <strong>02</strong>
-                <span>Schutzbedarf nennen</span>
-              </div>
-              <div class="proof">
-                <strong>03</strong>
-                <span>persönliche Beratung erhalten</span>
-              </div>
-              <div class="proof">
-                <strong>04</strong>
-                <span>Sicherheitskonzept entwickeln</span>
-              </div>
+    <section id="about" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Über KUGLER-ALARM</h2>
+                <p>Wir sind Ihr zuverlässiger Partner für Sicherheit</p>
             </div>
-          </div>
-
-          <form class="form-card reveal delay-1" id="contact-form" novalidate>
-            <div class="form-grid">
-              <label>
-                Name
-                <input type="text" name="name" autocomplete="name" placeholder="Ihr Name" required>
-              </label>
-              <label>
-                Unternehmen
-                <input type="text" name="company" autocomplete="organization" placeholder="Optional">
-              </label>
-              <label>
-                Objektart
-                <select name="object" required>
-                  <option value="">Bitte wählen</option>
-                  <option>Privates Wohnhaus</option>
-                  <option>Gewerbeobjekt</option>
-                  <option>Industrie oder Lager</option>
-                  <option>Praxis, Büro oder Einrichtung</option>
-                </select>
-              </label>
-              <label>
-                Rückkontakt
-                <input type="text" name="reply" autocomplete="off" placeholder="Kontakt auf Anfrage" required>
-              </label>
-              <label class="full">
-                Sicherheitsbedarf
-                <textarea name="message" placeholder="Einbruchschutz, Videoüberwachung, Brandmelder, Zutritt oder noch offen" required></textarea>
-              </label>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3>Unsere Geschichte</h3>
+                    <p>Gegründet 2005, hat KUGLER-ALARM sich als führender Anbieter von Sicherheitssystemen etabliert. Seit über 15 Jahren schützen wir Tausende von Kunden in ganz Deutschland.</p>
+                    <p>Unsere Mission ist es, innovative Sicherheitslösungen anzubieten, die den Bedürfnissen unserer Kunden entsprechen und ihre Sicherheit gewährleisten.</p>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Unsere Werte</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Qualität:</strong> Wir bieten nur die besten Produkte und Dienstleistungen</li>
+                        <li><strong>Vertrauen:</strong> Unser Kundenvertrauen ist unser größter Wert</li>
+                        <li><strong>Innovation:</strong> Wir setzen auf moderne Technologie</li>
+                        <li><strong>Service:</strong> Professionelle Beratung und Support</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal" style="grid-column: span 2;">
+                    <h3>Warum KUGLER-ALARM?</h3>
+                    <p>Wir unterscheiden uns durch unsere langjährige Erfahrung, unsere qualifizierten Techniker und unsere Kundenorientierung. Unser Ziel ist es, Ihnen ein Gefühl der Sicherheit zu geben, damit Sie sich auf Ihr Leben konzentrieren können.</p>
+                    <p>Mit über 15 Jahren Erfahrung in der Sicherheitsbranche bieten wir maßgeschneiderte Lösungen für alle Arten von Immobilien und Unternehmen. Unsere Systeme sind zuverlässig, einfach zu bedienen und bieten höchsten Schutz.</p>
+                </div>
             </div>
-            <div class="actions">
-              <button class="btn primary" type="submit">Anfrage vorbereiten</button>
-              <a class="btn ghost" href="#home" data-link="home">Zurück zur Startseite</a>
-            </div>
-            <p class="form-success" id="form-success" role="status" aria-live="polite">Danke. Die Demo zeigt hier einen Success-State, ohne echte Daten zu senden.</p>
-          </form>
         </div>
-      </div>
     </section>
-  </main>
 
-  <a href="tel:+492103248990" class="fab reveal delay-3" aria-label="Jetzt anrufen" title="24/7 Service anrufen">
-    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-  </a>
+    <section id="contact" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontakt</h2>
+                <p>Nehmen Sie Kontakt mit uns auf</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3>Kontaktinformationen</h3>
+                    <div class="card">
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-phone"></i>
+                            <strong>Telefon:</strong> +49 123 456789
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-envelope"></i>
+                            <strong>E-Mail:</strong> info@kugler-alarm.de
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-clock"></i>
+                            <strong>Öffnungszeiten:</strong><br>
+                            Montag - Freitag: 8:00 - 18:00<br>
+                            Samstag: 9:00 - 14:00<br>
+                            Sonntag: Geschlossen
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Kontaktformular</h3>
+                    <div class="card">
+                        <form>
+                            <div style="margin-bottom: 15px;">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label for="email">E-Mail</label>
+                                <input type="email" id="email" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label for="message">Nachricht</label>
+                                <textarea id="message" rows="4" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Nachricht senden</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <div style="margin-bottom: 12px; color: var(--text);">
-      <strong>KUGLER-ALARM GmbH</strong> | Forststraße 37 | 40721 Hilden
-    </div>
-    <div style="margin-bottom: 24px; display: flex; justify-content: center; gap: 16px;">
-      <a href="https://www.kugler-alarm.de/impressum/" target="_blank">Impressum</a>
-      <a href="https://www.kugler-alarm.de/datenschutzerklaerung-2/" target="_blank">Datenschutz</a>
-    </div>
-    <p>your demo webseite made by <a href="https://inbox-elevate.de/" target="_blank" rel="noopener">inbox elevate</a></p>
-  </footer>
+    <footer style="background-color: #333; color: white; padding: 30px 0; margin-top: 50px;">
+        <div class="container">
+            <div class="grid-3">
+                <div>
+                    <h3>KUGLER-ALARM</h3>
+                    <p>Schützen Sie Ihr Zuhause und Ihre Unternehmen mit modernsten Sicherheitssystemen.</p>
+                </div>
+                
+                <div>
+                    <h3>Navigation</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li><a href="#home" style="color: white; text-decoration: none;">Home</a></li>
+                        <li><a href="#services" style="color: white; text-decoration: none;">Leistungen</a></li>
+                        <li><a href="#about" style="color: white; text-decoration: none;">Über uns</a></li>
+                        <li><a href="#contact" style="color: white; text-decoration: none;">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Kontakt</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Musterstraße 123, 12345 Musterstadt</p>
+                    <p><i class="fas fa-phone"></i> +49 123 456789</p>
+                    <p><i class="fas fa-envelope"></i> info@kugler-alarm.de</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+                <p>&copy; 2023 KUGLER-ALARM. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
 
-  <script>
-    const pages = document.querySelectorAll('.page');
-    const navLinks = document.querySelectorAll('[data-link]');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const form = document.getElementById('contact-form');
-    const formSuccess = document.getElementById('form-success');
-    let activePage = 'home';
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = function() {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        // Initial check
+        revealOnScroll();
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Set active navigation link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUGLER-ALARM - Sicherheit für Ihr Zuhause und Unternehmen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #0066cc;
+            --accent: #ff6600;
+            --light: #f8f9fa;
+            --dark: #333333;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
         }
-      });
-    }, { threshold: 0.16 });
-
-    function triggerReveal() {
-      const active = document.querySelector('.page.active');
-      if (!active) return;
-      active.querySelectorAll('.reveal').forEach((item) => {
-        item.classList.remove('visible');
-        revealObserver.observe(item);
-        if (item.getBoundingClientRect().top < window.innerHeight * 0.92) {
-          requestAnimationFrame(() => item.classList.add('visible'));
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      });
-    }
-
-    function setActiveNavigation(pageId) {
-      navLinks.forEach((link) => {
-        link.classList.toggle('active', link.dataset.link === pageId);
-      });
-    }
-
-    function navigateTo(pageId) {
-      if (!document.getElementById(`page-${pageId}`)) pageId = 'home';
-      activePage = pageId;
-      document.body.classList.remove('menu-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      setActiveNavigation(pageId);
-      pages.forEach(p => {
-        p.classList.remove('active');
-        p.classList.add('exiting');
-      });
-      setTimeout(() => {
-        pages.forEach(p => p.classList.remove('exiting'));
-        document.getElementById(`page-${pageId}`).classList.add('active');
-        window.scrollTo({ top: 0 });
-        triggerReveal();
-      }, 300);
-    }
-
-    function routeFromHash() {
-      const pageId = window.location.hash.replace('#', '') || 'home';
-      navigateTo(pageId);
-    }
-
-    navLinks.forEach((link) => {
-      link.addEventListener('click', (event) => {
-        const pageId = link.dataset.link;
-        if (!pageId) return;
-        event.preventDefault();
-        if (activePage === pageId) {
-          document.body.classList.remove('menu-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          return;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
         }
-        history.pushState(null, '', `#${pageId}`);
-        navigateTo(pageId);
-      });
-    });
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: #e05a00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+        
+        .form-success {
+            display: none;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            margin-top: 15px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .text-muted {
+            color: var(--gray);
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .page.exiting {
+            animation: fadeOut 0.35s forwards;
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 25px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--gray);
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container container">
+            <a href="#" class="logo">KUGLER<span>-ALARM</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Leistungen</a></li>
+                <li><a href="#about">Über uns</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
-    menuToggle.addEventListener('click', () => {
-      const isOpen = document.body.classList.toggle('menu-open');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-    });
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>Schützen Sie Ihr Zuhause und Ihre Unternehmen</h1>
+                <p>KUGLER-ALARM bietet maßgeschneiderte Sicherheitslösungen für Privatpersonen und Unternehmen. Wir bieten moderne Alarmanlagen, Videoüberwachung und professionelle Sicherheitsberatung.</p>
+                <a href="#contact" class="btn">Kontakt aufnehmen</a>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="section-title">
+                <h2>Unsere Leistungen</h2>
+                <p>Wir bieten umfassende Sicherheitslösungen für alle Ihre Bedürfnisse</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Privatanschutz</h3>
+                    <p>Maßgeschneiderte Alarmanlagen für Ihre Privatwohnung oder Ihr Haus</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Gewerbliche Sicherheit</h3>
+                    <p>Professionelle Sicherheitslösungen für Unternehmen und Büros</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Videoüberwachung</h3>
+                    <p>Komplette Videoüberwachungssysteme mit HD-Kameras</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    window.addEventListener('hashchange', routeFromHash);
+    <section id="services" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unsere Services</h2>
+                <p>Umfassende Sicherheitslösungen für Privatpersonen und Unternehmen</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3>Alarmanlagen</h3>
+                    <p>Wir bieten moderne, zuverlässige Alarmanlagen für alle Arten von Immobilien. Unsere Systeme sind einfach zu bedienen und bieten umfassenden Schutz.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>24-Stunden-Überwachung</li>
+                        <li>Mobile Benachrichtigungen</li>
+                        <li>Integration mit Smart Home Systemen</li>
+                        <li>Professionelle Installation</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Videoüberwachung</h3>
+                    <p>Komplette Videoüberwachungssysteme mit HD-Kameras für Innen- und Außenbereiche. Unsere Systeme bieten klare Aufnahmen und intelligente Erkennungsfunktionen.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>HD-Kameras mit Nachtsehen</li>
+                        <li>Mobile App für Live-Überwachung</li>
+                        <li>Intelligente Bewegungserkennung</li>
+                        <li>Cloud-Speicherung</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Sicherheitsberatung</h3>
+                    <p>Professionelle Sicherheitsberatung für Unternehmen und Privatpersonen. Wir analysieren Ihre Sicherheitsbedürfnisse und entwickeln maßgeschneiderte Lösungen.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Sicherheitsaudit</li>
+                        <li>Risikobewertung</li>
+                        <li>Personalisierte Lösungen</li>
+                        <li>Regelmäßige Überprüfung</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Wartung & Support</h3>
+                    <p>Regelmäßige Wartung und technischer Support für alle unsere Sicherheitssysteme. Wir garantieren die optimale Funktionalität Ihrer Anlagen.</p>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Regelmäßige Wartung</li>
+                        <li>24/7 Support</li>
+                        <li>Software-Updates</li>
+                        <li>Technische Beratung</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      formSuccess.classList.add('show');
-      form.reset();
-    });
+    <section id="about" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Über KUGLER-ALARM</h2>
+                <p>Wir sind Ihr zuverlässiger Partner für Sicherheit</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3>Unsere Geschichte</h3>
+                    <p>Gegründet 2005, hat KUGLER-ALARM sich als führender Anbieter von Sicherheitssystemen etabliert. Seit über 15 Jahren schützen wir Tausende von Kunden in ganz Deutschland.</p>
+                    <p>Unsere Mission ist es, innovative Sicherheitslösungen anzubieten, die den Bedürfnissen unserer Kunden entsprechen und ihre Sicherheit gewährleisten.</p>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Unsere Werte</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Qualität:</strong> Wir bieten nur die besten Produkte und Dienstleistungen</li>
+                        <li><strong>Vertrauen:</strong> Unser Kundenvertrauen ist unser größter Wert</li>
+                        <li><strong>Innovation:</strong> Wir setzen auf moderne Technologie</li>
+                        <li><strong>Service:</strong> Professionelle Beratung und Support</li>
+                    </ul>
+                </div>
+                
+                <div class="reveal" style="grid-column: span 2;">
+                    <h3>Warum KUGLER-ALARM?</h3>
+                    <p>Wir unterscheiden uns durch unsere langjährige Erfahrung, unsere qualifizierten Techniker und unsere Kundenorientierung. Unser Ziel ist es, Ihnen ein Gefühl der Sicherheit zu geben, damit Sie sich auf Ihr Leben konzentrieren können.</p>
+                    <p>Mit über 15 Jahren Erfahrung in der Sicherheitsbranche bieten wir maßgeschneiderte Lösungen für alle Arten von Immobilien und Unternehmen. Unsere Systeme sind zuverlässig, einfach zu bedienen und bieten höchsten Schutz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    routeFromHash();
-  </script>
+    <section id="contact" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontakt</h2>
+                <p>Nehmen Sie Kontakt mit uns auf</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3>Kontaktinformationen</h3>
+                    <div class="card">
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-phone"></i>
+                            <strong>Telefon:</strong> +49 123 456789
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-envelope"></i>
+                            <strong>E-Mail:</strong> info@kugler-alarm.de
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <i class="fas fa-clock"></i>
+                            <strong>Öffnungszeiten:</strong><br>
+                            Montag - Freitag: 8:00 - 18:00<br>
+                            Samstag: 9:00 - 14:00<br>
+                            Sonntag: Geschlossen
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h3>Kontaktformular</h3>
+                    <div class="card">
+                        <form>
+                            <div style="margin-bottom: 15px;">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label for="email">E-Mail</label>
+                                <input type="email" id="email" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label for="message">Nachricht</label>
+                                <textarea id="message" rows="4" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Nachricht senden</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: #333; color: white; padding: 30px 0; margin-top: 50px;">
+        <div class="container">
+            <div class="grid-3">
+                <div>
+                    <h3>KUGLER-ALARM</h3>
+                    <p>Schützen Sie Ihr Zuhause und Ihre Unternehmen mit modernsten Sicherheitssystemen.</p>
+                </div>
+                
+                <div>
+                    <h3>Navigation</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li><a href="#home" style="color: white; text-decoration: none;">Home</a></li>
+                        <li><a href="#services" style="color: white; text-decoration: none;">Leistungen</a></li>
+                        <li><a href="#about" style="color: white; text-decoration: none;">Über uns</a></li>
+                        <li><a href="#contact" style="color: white; text-decoration: none;">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Kontakt</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Musterstraße 123, 12345 Musterstadt</p>
+                    <p><i class="fas fa-phone"></i> +49 123 456789</p>
+                    <p><i class="fas fa-envelope"></i> info@kugler-alarm.de</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #555;">
+                <p>&copy; 2023 KUGLER-ALARM. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = function() {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        // Initial check
+        revealOnScroll();
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Set active navigation link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
