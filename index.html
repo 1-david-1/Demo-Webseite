@@ -1245,7 +1245,39 @@
       transition-delay: 300ms;
     }
 
-    footer {
+    .fab {
+      position: fixed;
+      bottom: 34px;
+      right: 34px;
+      z-index: 99;
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      color: var(--text);
+      box-shadow: 0 8px 32px rgba(197, 22, 29, 0.4);
+      transition: transform var(--duration-fast) var(--ease),
+                  box-shadow var(--duration-fast) var(--ease);
+    }
+
+    .fab:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 12px 42px rgba(197, 22, 29, 0.6);
+    }
+
+    .fab svg {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 980px) {
       padding: 34px clamp(18px, 4vw, 42px);
       border-top: 1px solid var(--border);
       background: var(--bg);
@@ -1450,7 +1482,7 @@
             <div class="hero-copy">
               <p class="kicker reveal">Sicherheitstechnik und Alarmanlagen aus Hilden</p>
               <h1 id="home-title" class="reveal delay-1">Der beste Schutz ist Teamwork.</h1>
-              <p class="lead reveal delay-2">Seit 2004 entwickelt KUGLER-ALARM maßgeschneiderte Sicherheitslösungen für Unternehmen und private Haushalte. Persönliche Beratung, zertifizierte Expertise und Full-Service machen aus Technik ein verlässliches Sicherheitskonzept.</p>
+              <p class="lead reveal delay-2"><strong>Wir schützen Menschen und Werte.</strong> Seit 2004 entwickelt KUGLER-ALARM maßgeschneiderte Sicherheitslösungen für Unternehmen und private Haushalte. Persönliche Beratung, zertifizierte Expertise und Full-Service machen aus Technik ein verlässliches Sicherheitskonzept.</p>
               <div class="trust-rail reveal delay-2" aria-label="Trust Signals">
                 <span class="trust-chip">VdS anerkannt</span>
                 <span class="trust-chip">LKA-Errichterverzeichnis</span>
@@ -1722,7 +1754,8 @@
           <div class="contact-note reveal">
             <p class="kicker">Kontakt</p>
             <h2 id="contact-title">Lassen Sie uns über Sicherheit sprechen.</h2>
-            <p class="lead">Die Originalseite setzt stark auf persönlichen Kontakt. Diese Demo übersetzt das in ein ruhiges Anfrageformular, das zuerst die Situation klärt: Zuhause, Unternehmen, Branche, Schutzbedarf und gewünschter Rückkontakt.</p>
+            <p class="lead">Rufen Sie uns noch heute an unter <a href="tel:+492103248990" style="color:var(--accent); font-weight:800; text-decoration:none;">02103 248990</a> oder schreiben Sie uns an <a href="mailto:info@kugler-alarm.de" style="color:var(--accent); font-weight:800; text-decoration:none;">info@kugler-alarm.de</a>. Wir sind 24/7 für Sie da!</p>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Die Originalseite setzt stark auf persönlichen Kontakt. Diese Demo übersetzt das in ein ruhiges Anfrageformular, das zuerst die Situation klärt.</p>
             <div class="proof-row" aria-label="Kontaktkontext">
               <div class="proof">
                 <strong>01</strong>
@@ -1783,7 +1816,18 @@
     </section>
   </main>
 
+  <a href="tel:+492103248990" class="fab reveal delay-3" aria-label="Jetzt anrufen" title="24/7 Service anrufen">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+  </a>
+
   <footer>
+    <div style="margin-bottom: 12px; color: var(--text);">
+      <strong>KUGLER-ALARM GmbH</strong> | Forststraße 37 | 40721 Hilden
+    </div>
+    <div style="margin-bottom: 24px; display: flex; justify-content: center; gap: 16px;">
+      <a href="https://www.kugler-alarm.de/impressum/" target="_blank">Impressum</a>
+      <a href="https://www.kugler-alarm.de/datenschutzerklaerung-2/" target="_blank">Datenschutz</a>
+    </div>
     <p>your demo webseite made by <a href="https://inbox-elevate.de/" target="_blank" rel="noopener">inbox elevate</a></p>
   </footer>
 
